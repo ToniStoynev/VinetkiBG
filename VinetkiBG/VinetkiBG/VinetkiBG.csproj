@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -17,6 +17,13 @@
   <ItemGroup>
     <ProjectReference Include="..\VinetkiBG.Data\VinetkiBG.Data.csproj" />
     <ProjectReference Include="..\VinetkiBG.Domain\VinetkiBG.Domain.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Models\BidingModels\" />
+    <Folder Include="Models\ViewModels\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

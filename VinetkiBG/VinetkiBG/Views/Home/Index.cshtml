@@ -2,11 +2,36 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-success text-center">
-    <h1 class="display-4 text-success">BG TOLL</h1>
-    <h3 class="text-success">
-        Complete information
-        about new toll system
-        in Bulgaria
-    </h3>
-</div>
+
+@if (!this.User.Identity.IsAuthenticated)
+{
+    <div class="text-success text-center">
+        <h1 class="display-4 text-success font-weight-bold">BG TOLL</h1>
+        <h3 class="text-success font-italic">
+            Complete information
+            about new toll system
+            in Bulgaria
+        </h3>
+        <img src="~/542592e20118f46650e1092d166b9d09.png" class="d-block w-100 h-75" />
+    </div>
+}
+else
+{
+    @if (this.User.IsInRole("Admin"))
+    {
+        <div class="jumbotron bg-primary w-75 mx-auto m-8">
+            <h2 class="font-weight-bold text-center">Greetings, Administrator - @this.User.Identity.Name!</h2>
+            <hr class="bg-dark h2" />
+            <h4 class="text-center">Enjoy your work.</h4>
+        </div>
+    }
+    else
+    {
+        <div class="jumbotron bg-primary w-75 mx-auto m-8">
+            <h2 class="font-weight-bold text-center">Welcome, @this.User.Identity.Name</h2>
+            <hr class="bg-dark h2" />
+            <h4 class="text-center ">Eventures wishes you an exiting experience.</h4>
+        </div>
+    }
+}
+

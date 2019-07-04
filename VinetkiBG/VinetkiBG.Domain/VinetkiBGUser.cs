@@ -7,9 +7,15 @@ namespace VinetkiBG.Domain
 {
     public class VinetkiBGUser : IdentityUser
     {
+        public VinetkiBGUser()
+        {
+            this.Vechiles = new HashSet<Vechile>();
+        }
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
+
+        public IEnumerable<Vechile> Vechiles { get; set; }
 
     }
 }

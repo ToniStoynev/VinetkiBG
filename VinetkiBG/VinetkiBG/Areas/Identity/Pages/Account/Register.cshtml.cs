@@ -42,7 +42,6 @@ namespace VinetkiBG.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [EmailAddress]
             [Display(Name = "Username")]
             public string Username { get; set; }
 
