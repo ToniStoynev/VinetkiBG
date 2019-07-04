@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using VinetkiBG.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using VinetkiBG.Domain;
 
 namespace VinetkiBG
 {
@@ -35,12 +36,28 @@ namespace VinetkiBG
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<VinetkiBGDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
+
+            services.AddIdentity<VinetkiBGUser, IdentityRole>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<VinetkiBGDbContext>()
+                .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(option =>
+            {
+                option.Password.RequireDigit = false;
+                option.Password.RequireLowercase = false;
+                option.Password.RequireNonAlphanumeric = false;
+                option.Password.RequireUppercase = false;
+                option.Password.RequiredLength = 3;
+                option.Password.RequiredUniqueChars = 0;
+
+                option.User.RequireUniqueEmail = false;
+
+
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -48,7 +65,30 @@ namespace VinetkiBG
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
+            using (var serviceScope = app.ApplicationServices.CreateScope())
+            {
+                using (var context = serviceScope.ServiceProvider.GetRequiredService<VinetkiBGDbContext>())
+                {
+                    context.Database.EnsureCreated();
+
+                    if (!context.Roles.Any())
+                    {
+                        context.Roles.Add(new IdentityRole
+                        {
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
+
+                        context.Roles.Add(new IdentityRole
+                        {
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
+                    }
+                    context.SaveChanges();
+                }
+            }
+                if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
