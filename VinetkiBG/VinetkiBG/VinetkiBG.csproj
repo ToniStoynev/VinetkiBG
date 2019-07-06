@@ -21,7 +21,6 @@
 
 
   <ItemGroup>
-    <Folder Include="Models\BidingModels\" />
     <Folder Include="Models\ViewModels\" />
     <Folder Include="Services\" />
   </ItemGroup>
