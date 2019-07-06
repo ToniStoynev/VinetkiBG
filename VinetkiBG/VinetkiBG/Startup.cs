@@ -14,6 +14,7 @@ using VinetkiBG.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using VinetkiBG.Domain;
+using VinetkiBG.Services;
 
 namespace VinetkiBG
 {
@@ -60,6 +61,8 @@ namespace VinetkiBG
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddTransient<IVehicleService, VehicleService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

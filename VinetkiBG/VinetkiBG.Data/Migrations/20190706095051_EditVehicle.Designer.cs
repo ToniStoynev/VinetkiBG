@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VinetkiBG.Data;
 
 namespace VinetkiBG.Data.Migrations
 {
     [DbContext(typeof(VinetkiBGDbContext))]
-    partial class VinetkiBGDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190706095051_EditVehicle")]
+    partial class EditVehicle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
