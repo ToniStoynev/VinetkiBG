@@ -1,0 +1,39 @@
+﻿@model IEnumerable<VinetkiBG.Models.ViewModels.VehicleViewAllModel>
+
+@{
+    ViewData["Title"] = "All";
+}
+
+    <h1 class="text-center mt-4">All vehicles</h1>
+
+<div class="container-fluid mx-5">
+    <table class="table table-hover">
+        <thead>
+            <tr class="row">
+                <th scope="col" class="col-lg-2 suls-text-color">Car Brand</th>
+                <th scope="col" class="col-lg-2 suls-text-color">Vehicle Type</th>
+                <th scope="col" class="col-lg-2 suls-text-color">Country</th>
+                <th scope="col" class="col-lg-2 suls-text-color">Licence Plate</th>
+                <th scope="col" class="col-lg-2 suls-text-color">E-Vignnete</th>
+                <th scope="col" class="col-lg-2 suls-text-color">Remove Car</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var vehicle in Model)
+            {
+            <tr class="row">
+                <td class="col-lg-2 suls-text-color">@vehicle.Brand</td>
+                <td class="col-lg-2 suls-text-color">@vehicle.VehicleType</td>
+                <td class="col-lg-2 suls-text-color">@vehicle.Country</td>
+                <td class="col-lg-2 suls-text-color">@vehicle.LicencePlate</td>
+                <td class="col-lg-2 suls-text-color">
+                    <a href="/Submissions/Delete?id=@vehicle.Id" class="btn btn-primary">Purchase vignnete</a>
+                </td>
+                <td class="col-lg-2 suls-text-color">
+                    <a href="/Submissions/Delete?id=@vehicle.Id" class="btn btn-primary">Remove</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

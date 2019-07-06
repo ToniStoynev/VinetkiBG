@@ -5,11 +5,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VinetkiBG.Models.BidingModels;
+using VinetkiBG.Services;
 
 namespace VinetkiBG.Controllers
 {
     public class VehiclesController : Controller
     {
+        private readonly IVehicleService vehicleService;
+
+        public VehiclesController(IVehicleService vehicleService)
+        {
+            this.vehicleService = vehicleService;
+        }
+
         [Authorize]
         public IActionResult Add()
         {
@@ -20,7 +28,15 @@ namespace VinetkiBG.Controllers
         [HttpPost]
         public IActionResult Add(AddVechileBidingModel model)
         {
-            return null;
+            this.vehicleService.CreateVehicle(model.FriendlyName, model.Type, model.Country, model.PlateNumber);
+
+            return this.Redirect("/Vehicles/All");
+        }
+
+        public IActionResult All()
+        {
+            var viewModel = this.vehicleService.GetAll();
+            return this.View(viewModel);
         }
     }
 }
