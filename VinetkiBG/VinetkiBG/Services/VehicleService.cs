@@ -20,6 +20,8 @@ namespace VinetkiBG.Services
         }
         public void CreateVehicle(string name, string type, string country, string plateNumber, string ownerId)
         {
+            var user = this.context.Users.FirstOrDefault(x => x.Id == ownerId);
+
             Vechile vechile = new Vechile
             {
                 Brand = name,
@@ -28,7 +30,8 @@ namespace VinetkiBG.Services
                 PlateNumber = plateNumber,
                 OwnerId = ownerId
             };
-            this.context.Vechiles.Add(vechile);
+
+            user.Vechiles.Add(vechile);
             this.context.SaveChanges();
         }
 

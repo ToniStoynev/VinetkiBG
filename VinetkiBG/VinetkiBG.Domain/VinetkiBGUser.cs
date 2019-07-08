@@ -15,7 +15,7 @@ namespace VinetkiBG.Domain
 
         public string LastName { get; set; }
 
-        public IEnumerable<Vechile> Vechiles { get; set; }
+        public ICollection<Vechile> Vechiles { get; set; }
 
     }
 }
