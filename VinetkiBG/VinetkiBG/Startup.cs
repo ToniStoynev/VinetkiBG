@@ -62,6 +62,7 @@ namespace VinetkiBG
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            services.AddTransient<IUserService, UserService>();
             services.AddTransient<IVehicleService, VehicleService>();
         }
 

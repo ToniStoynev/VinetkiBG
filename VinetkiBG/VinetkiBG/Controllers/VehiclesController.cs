@@ -28,6 +28,10 @@ namespace VinetkiBG.Controllers
         [HttpPost]
         public IActionResult Add(AddVechileBidingModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return this.Redirect("/Vehicles/Add");
+            }
             this.vehicleService.CreateVehicle(model.FriendlyName, model.Type, model.Country, model.PlateNumber);
 
             return this.Redirect("/Vehicles/All");
