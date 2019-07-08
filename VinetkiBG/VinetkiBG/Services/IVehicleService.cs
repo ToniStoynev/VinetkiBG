@@ -8,8 +8,8 @@ namespace VinetkiBG.Services
 {
     public interface IVehicleService
     {
-        void CreateVehicle(string name, string type, string country, string plateNumber);
+        void CreateVehicle(string name, string type, string country, string plateNumber, string ownerId);
 
-        IEnumerable<VehicleViewAllModel> GetAll();
+        IEnumerable<VehicleViewAllModel> GetAll(string id);
     }
 }
