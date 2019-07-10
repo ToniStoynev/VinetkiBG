@@ -5,20 +5,23 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using VinetkiBG.Data;
 using VinetkiBG.Models.ViewModels;
+using VinetkiBG.Services;
 
 namespace VinetkiBG.Controllers
 {
     public class VignetteController : Controller
     {
-        private readonly VinetkiBGDbContext db;
+        private readonly IVignneteService vignneteService;
+        private readonly IVehicleService vehicleService;
 
-        public VignetteController(VinetkiBGDbContext db)
+        public VignetteController(IVignneteService vignneteService, IVehicleService vehicleService)
         {
-            this.db = db;
+            this.vignneteService = vignneteService;
+            this.vehicleService = vehicleService;
         }
         public IActionResult Purchase(string id)
         {
-            var vehicle = this.db.Vechiles.Where(x => x.Id == id).FirstOrDefault();
+            var vehicle = this.vehicleService.GetVechileById(id);
 
             var model = new VehicleViewAllModel
             {

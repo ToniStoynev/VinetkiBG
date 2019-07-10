@@ -54,5 +54,14 @@ namespace VinetkiBG.Services
 
             return result;
         }
+
+        public Vechile GetVechileById(string id)
+        {
+            var vehicle = this.context.Vechiles
+                .Where(x => x.Id == id)
+                .FirstOrDefault();
+
+            return vehicle;
+        }
     }
 }

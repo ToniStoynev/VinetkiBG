@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VinetkiBG.Domain;
 using VinetkiBG.Models.ViewModels;
 
 namespace VinetkiBG.Services
@@ -11,5 +12,7 @@ namespace VinetkiBG.Services
         void CreateVehicle(string name, string type, string country, string plateNumber, string ownerId);
 
         IEnumerable<VehicleViewAllModel> GetAll(string id);
+
+        Vechile GetVechileById(string id);
     }
 }
