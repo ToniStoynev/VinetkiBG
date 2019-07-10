@@ -1,29 +1,39 @@
-﻿
+﻿@model VinetkiBG.Models.ViewModels.VehicleViewAllModel
 @{
     ViewData["Title"] = "Purchase";
 }
-<h1 class="text-center mt-4">Add vehicle</h1>
+<h1 class="text-center mt-4">Purchase vignnete</h1>
 
-<div class="container-fluid mt-5">
-    <form class="form-inline justify-content-center">
-        <label class="sr-only" for="inlineFormInputName2">Name</label>
-        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Jane Doe">
-
-        <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
-        <div class="input-group mb-2 mr-sm-2">
-            <div class="input-group-prepend">
-                <div class="input-group-text"></div>
-            </div>
-            <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username">
-        </div>
-
-        <div class="form-check mb-2 mr-sm-2">
-
-        </div>
-        <div>
-            <button type="submit" class="btn btn-primary mb-2">Buy Vignette</button>
-        </div>
-    </form>
+<div class="d-flex justify-content-center">
+    <table class="table table-striped w-75 mt-5">
+        <thead>
+            <tr>
+                <th scope="col">Friendly Name</th>
+                <th scope="col">Details</th>
+                <th scope="col">Vignette</th>
+                <th scope="col">Start Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">@Model.Brand</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
-
 

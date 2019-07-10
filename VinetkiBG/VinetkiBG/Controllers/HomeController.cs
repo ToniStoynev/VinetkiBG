@@ -44,9 +44,12 @@ namespace VinetkiBG.Controllers
         {
             var id = manager.GetUserId(this.User);
 
+
+
             var user = this.userService.GetUserById(id);
 
-            int vehicleCount = user.Vechiles.Count();
+
+            int vehicleCount = userService.GetVehicleCountByUserId(id);
                 
             var model = new UserViewModel
             {

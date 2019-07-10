@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,7 +19,14 @@ namespace VinetkiBG.Services
         }
         public VinetkiBGUser GetUserById(string id)
         {
-            return this.context.Users.FirstOrDefault(x => x.Id == id);
+            return this.context.Users.Include(x=>x.Vechiles).FirstOrDefault(x => x.Id == id);
+        }
+
+        public int GetVehicleCountByUserId(string id)
+        {
+            var result = context.Users.Where(x => x.Id == id).Select(x => x.Vechiles.Count()).FirstOrDefault();
+
+            return result;
         }
     }
 }

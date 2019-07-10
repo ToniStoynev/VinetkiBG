@@ -44,6 +44,7 @@ namespace VinetkiBG.Services
                 .Where(x => x.OwnerId == id)
                 .Select(x => new VehicleViewAllModel
                 {
+                    Id = x.Id,
                     Brand = x.Brand,
                     VehicleType = x.VechileType,
                     Country = x.Country,

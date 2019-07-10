@@ -10,5 +10,6 @@ namespace VinetkiBG.Services
     public interface IUserService
     {
         VinetkiBGUser GetUserById(string id);
+        int GetVehicleCountByUserId(string id);
     }
 }
