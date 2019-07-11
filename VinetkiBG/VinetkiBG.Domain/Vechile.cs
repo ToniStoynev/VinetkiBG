@@ -27,5 +27,7 @@ namespace VinetkiBG.Domain
 
         public string OwnerId { get; set; }
         public VinetkiBGUser Owner { get; set; }
+
+        public Vignette Vignette { get; set; }
     }
 }

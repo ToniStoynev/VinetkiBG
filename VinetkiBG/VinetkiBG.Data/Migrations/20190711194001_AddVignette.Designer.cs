@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VinetkiBG.Data;
 
 namespace VinetkiBG.Data.Migrations
 {
     [DbContext(typeof(VinetkiBGDbContext))]
-    partial class VinetkiBGDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190711194001_AddVignette")]
+    partial class AddVignette
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -174,13 +176,13 @@ namespace VinetkiBG.Data.Migrations
 
                     b.Property<decimal>("Price");
 
-                    b.Property<string>("VechileId")
-                        .IsRequired();
+                    b.Property<string>("VechileId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("VechileId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[VechileId] IS NOT NULL");
 
                     b.ToTable("Vignettes");
                 });
@@ -296,8 +298,7 @@ namespace VinetkiBG.Data.Migrations
                 {
                     b.HasOne("VinetkiBG.Domain.Vechile", "Vechile")
                         .WithOne("Vignette")
-                        .HasForeignKey("VinetkiBG.Domain.Vignette", "VechileId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("VinetkiBG.Domain.Vignette", "VechileId");
                 });
 #pragma warning restore 612, 618
         }

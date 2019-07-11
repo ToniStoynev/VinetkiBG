@@ -13,6 +13,8 @@ namespace VinetkiBG.Data
         public DbSet<VinetkiBGUser> VinetkiBGUsers { get; set; }
 
         public DbSet<Vechile> Vechiles { get; set; }
+
+        public DbSet<Vignette> Vignettes { get; set; }
         public VinetkiBGDbContext(DbContextOptions<VinetkiBGDbContext> options) : base(options)
         {
 
@@ -26,6 +28,11 @@ namespace VinetkiBG.Data
 
             builder.Entity<Vechile>()
                 .HasOne(o => o.Owner);
+
+            builder.Entity<Vechile>()
+                .HasOne(v => v.Vignette)
+                .WithOne(v => v.Vechile)
+                .HasForeignKey<Vignette>(f => f.VechileId);
 
             base.OnModelCreating(builder);
         }
