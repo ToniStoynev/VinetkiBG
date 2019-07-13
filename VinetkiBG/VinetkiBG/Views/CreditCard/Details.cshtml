@@ -1,36 +1,32 @@
-﻿
+﻿@model VinetkiBG.Models.BidingModels.CreditCardBindingModel
 @{
     ViewData["Title"] = "Details";
 }
 
 <h1 class="text-center mt-4">Payment By Credit Card</h1>
 <div class="d-flex justify-content-center mt-5">
-    <form>
+    <form method="post">
         <div class="form-row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group col-md-6">
-                <label for="inputEmail4">Card Holder Name</label>
-                <input type="text" class="form-control" id="inputEmail4" placeholder="Card Holder Name">
+                <label asp-for="@Model.CardHolderName">Card Holder Name</label>
+                <input asp-for="@Model.CardHolderName" type="text" class="form-control"  placeholder="Card Holder Name">
             </div>
             <div class="form-group col-md-6">
-                <label for="inputPassword4">Credit Card Number</label>
-                <input type="text" class="form-control" id="inputPassword4" placeholder="Credit Card Number">
+                <label asp-for="@Model.CreditCardNumber">Credit Card Number</label>
+                <input asp-for="@Model.CreditCardNumber" type="text" class="form-control"  placeholder="Credit Card Number">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="inputEmail4">CVV</label>
-                <input type="text" class="form-control" id="inputEmail4" placeholder="CVV">
+                <label asp-for="@Model.CVV">CVV</label>
+                <input  asp-for="@Model.CVV" type="text" class="form-control" placeholder="CVV">
             </div>
             <div class="form-group col-md-6">
-                <label for="inputPassword4">Expiration Date</label>
-                <input type="date" class="form-control" id="inputPassword4" placeholder="Expiration Date">
+                <label asp-for="@Model.ExpirationDate">Expiration Date</label>
+                <input asp-for="@Model.ExpirationDate" type="date" class="form-control" placeholder="Expiration Date">
             </div>
         </div>
-        <div class="form-row">
-            <div class="form-group col-md-12">
-                <label for="inputCity">Total</label>
-                <input type="number" class="form-control" id="inputCity">
-            </div>
         </div>
             <div class="d-flex justify-content-center mt-3">
                 <button type="submit" class="btn btn-primary font-weight-bold">Pay Now</button>
