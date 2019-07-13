@@ -28,6 +28,14 @@ namespace VinetkiBG.Controllers
         [HttpPost]
         public IActionResult Details(CreditCardBindingModel input)
         {
+
+            if (!this.ModelState.IsValid)
+            {
+                return View();
+            }
+            this.creditCardService.AddCreditCard(input.CardHolderName, input.CreditCardNumber,
+                input.CVV, input.ExpirationDate);
+
             return View();
         }
 

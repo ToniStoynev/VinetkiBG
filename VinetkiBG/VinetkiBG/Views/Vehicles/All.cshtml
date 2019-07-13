@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<VinetkiBG.Models.ViewModels.VehicleViewAllModel>
-
 @{
     ViewData["Title"] = "All";
 }
@@ -30,7 +29,7 @@
                         <a href="/Vignette/Purchase/?id=@vehicle.Id" class="btn btn-primary">Purchase vignnete</a>
                     </td>
                     <td class="col-lg-2 suls-text-color">
-                        <a href="/Submissions/Delete?id=@vehicle.Id" class="btn btn-primary">Remove</a>
+                        <a href="/Submissions/Delete?id=@vehicle.Id" class="btn btn-primary" id="remove">Remove</a>
                     </td>
                 </tr>
             }
@@ -41,3 +40,4 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+

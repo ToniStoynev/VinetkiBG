@@ -19,7 +19,15 @@
                 <tr>
                     <th scope="row">@Model.Brand</th>
                     <td>@Model.LicencePlate</td>
-                    <td><input type="text" /></td>
+                    <td>
+                        <select class="form-control" id="inlineFormCustomSelect">
+                            <option selected>Select Vignnete</option>
+                            <option value="Weekend">Weekend</option>
+                            <option value="Weekly">Weekly</option>
+                            <option value="Monthly">Monthly</option>
+                            <option value="Yearly">Yearly</option>
+                        </select>
+                    </td>
                     <td><input type="date" /></td>
                 </tr>
             </tbody>

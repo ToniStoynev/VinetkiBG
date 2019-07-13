@@ -38,10 +38,14 @@ namespace VinetkiBG.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
+            [StringLength(maximumLength: 20, 
+                ErrorMessage = "Username should between 4 and 20 symbols", MinimumLength =3)]
             public string Username { get; set; }
 
             [Required]
             [DataType(DataType.Password)]
+            [StringLength(maximumLength: 15,
+                ErrorMessage = "Password should between 3 and 20 symbols", MinimumLength = 5)]
             public string Password { get; set; }
 
             [Display(Name = "Remember me?")]
