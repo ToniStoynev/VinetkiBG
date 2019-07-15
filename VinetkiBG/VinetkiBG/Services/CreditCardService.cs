@@ -11,21 +11,23 @@ namespace VinetkiBG.Services
     public class CreditCardService : ICreditCardService
     {
         private readonly VinetkiBGDbContext db;
-        private readonly UserManager<VinetkiBGUser> manager;
 
-        public CreditCardService(VinetkiBGDbContext db, UserManager<VinetkiBGUser> manager)
+
+        public CreditCardService(VinetkiBGDbContext db)
         {
             this.db = db;
-            this.manager = manager;
         }
-        public void AddCreditCard(string cardHolder, string cardNumber, string cvv, DateTime expirationDate)
+        public void AddCreditCard(string cardHolder, string cardNumber, string cvv,
+            DateTime expirationDate, string userId)
         {
             var card = new CreditCard
             {
                 CardHolderName = cardHolder,
                 CreditCardNumber = cardNumber,
                 CVV = cvv,
-                ExpirationDate = expirationDate
+                ExpirationDate = expirationDate,
+                UserId = userId
+
             };
 
             this.db.CreditCards.Add(card);

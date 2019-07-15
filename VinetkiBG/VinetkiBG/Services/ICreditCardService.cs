@@ -8,6 +8,6 @@ namespace VinetkiBG.Services
     public interface ICreditCardService
     {
         void AddCreditCard(string cardHolder, string cardNumber, string cvv, 
-            DateTime expirationDate);
+            DateTime expirationDate, string userId);
     }
 }
