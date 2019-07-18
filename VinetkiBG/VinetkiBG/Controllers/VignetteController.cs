@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VinetkiBG.Data;
+using VinetkiBG.Models.BidingModels;
 using VinetkiBG.Models.ViewModels;
 using VinetkiBG.Services;
 
@@ -32,6 +34,19 @@ namespace VinetkiBG.Controllers
             };
 
             return View(model);
+        }
+
+        [Authorize(Roles ="Admin")]
+        public IActionResult VignetteCheck()
+        {
+            return this.View();
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public IActionResult VignetteCheck(VignetteCheckInputModel input)
+        {
+            return this.View();
         }
     }
 }

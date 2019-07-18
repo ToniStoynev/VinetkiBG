@@ -52,9 +52,6 @@ namespace VinetkiBG.Controllers
             return this.View(model);
         }
 
-        public IActionResult VignetteCheck()
-        {
-            return this.View();
-        }
+       
     }
 }
