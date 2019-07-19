@@ -16,7 +16,6 @@ namespace VinetkiBG.Data
 
         public DbSet<Vignette> Vignettes { get; set; }
 
-        public DbSet<CreditCard> CreditCards { get; set; }
         public VinetkiBGDbContext(DbContextOptions<VinetkiBGDbContext> options) : base(options)
         {
 
@@ -26,10 +25,6 @@ namespace VinetkiBG.Data
         {
             builder.Entity<VinetkiBGUser>()
                 .HasMany(x => x.Vechiles)
-                .WithOne(x => x.Owner);
-
-            builder.Entity<VinetkiBGUser>()
-                .HasMany(x => x.Cards)
                 .WithOne(x => x.Owner);
 
             builder.Entity<Vechile>()

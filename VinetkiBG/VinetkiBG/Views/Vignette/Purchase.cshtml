@@ -1,4 +1,4 @@
-﻿@model VinetkiBG.Models.ViewModels.VehicleViewAllModel
+﻿@model VinetkiBG.Models.BidingModels.PurchaseVignetteBidingModel
 @{
     ViewData["Title"] = "Purchase";
 }
@@ -15,10 +15,10 @@
         </thead>
         <tbody>
             <tr>
-                <th scope="row">@Model.Brand</th>
-                <td>@Model.LicencePlate</td>
+                @*<th scope="row">@Model.Brand</th>
+                <td>@Model.LicencePlate</td>*@
                 <td>
-                    <select class="form-control" id="inlineFormCustomSelect">
+                    <select asp-for="@Model.VignetteType" class="form-control">
                         <option selected>Select Vignnete</option>
                         <option value="Weekend">Weekend</option>
                         <option value="Weekly">Weekly</option>
@@ -26,7 +26,7 @@
                         <option value="Yearly">Yearly</option>
                     </select>
                 </td>
-                <td><input type="date" /></td>
+                <td><input asp-for="@Model.StartDate" type="date" /></td>
             </tr>
             <tr>
                 <td>

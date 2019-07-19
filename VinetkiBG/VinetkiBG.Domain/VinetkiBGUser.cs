@@ -10,15 +10,12 @@ namespace VinetkiBG.Domain
         public VinetkiBGUser()
         {
             this.Vechiles = new HashSet<Vechile>();
-            this.Cards = new HashSet<CreditCard>();
         }
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
 
         public ICollection<Vechile> Vechiles { get; set; }
-
-        public ICollection<CreditCard> Cards { get; set; }
 
     }
 }

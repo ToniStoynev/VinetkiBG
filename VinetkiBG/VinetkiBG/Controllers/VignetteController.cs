@@ -21,19 +21,25 @@ namespace VinetkiBG.Controllers
             this.vignneteService = vignneteService;
             this.vehicleService = vehicleService;
         }
-        public IActionResult Purchase(string id)
+        public IActionResult Purchase()
         {
-            var vehicle = this.vehicleService.GetVechileById(id);
+            //var vehicle = this.vehicleService.GetVechileById(id);
 
-            var model = new VehicleViewAllModel
-            {
-                Brand = vehicle.Brand,
-                Country = vehicle.Country,
-                LicencePlate = vehicle.PlateNumber,
-                VehicleType = vehicle.VechileType
-            };
+            //var model = new VehicleViewAllModel
+            //{
+            //    Brand = vehicle.Brand,
+            //    Country = vehicle.Country,
+            //    LicencePlate = vehicle.PlateNumber,
+            //    VehicleType = vehicle.VechileType
+            //};
 
-            return View(model);
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Purchase(PurchaseVignetteBidingModel input)
+        {
+            return null;
         }
 
         [Authorize(Roles ="Admin")]

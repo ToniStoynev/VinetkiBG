@@ -65,7 +65,6 @@ namespace VinetkiBG
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IVehicleService, VehicleService>();
             services.AddTransient<IVignneteService, VignetteService>();
-            services.AddTransient<ICreditCardService, CreditCardService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

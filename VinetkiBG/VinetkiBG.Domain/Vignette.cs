@@ -18,11 +18,12 @@ namespace VinetkiBG.Domain
         [Required]
         public decimal Price { get; set; }
 
+        [Required]
+        public DateTime StartDate { get; set; }
+
 
         [Required]
-        [StringLength(maximumLength: 15, ErrorMessage = "Duration should be between " +
-            "5 and 15 symbols", MinimumLength = 5)]
-        public string Duration { get; set; }
+        public DateTime EndDate { get; set; }
 
         [Required]
         public string VechileId { get; set; }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VinetkiBG.Data;
 
 namespace VinetkiBG.Data.Migrations
 {
     [DbContext(typeof(VinetkiBGDbContext))]
-    partial class VinetkiBGDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190719084829_EditedVignette")]
+    partial class EditedVignette
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -171,8 +173,6 @@ namespace VinetkiBG.Data.Migrations
                     b.Property<DateTime>("EndDate");
 
                     b.Property<decimal>("Price");
-
-                    b.Property<DateTime>("StartDate");
 
                     b.Property<string>("VechileId")
                         .IsRequired();
