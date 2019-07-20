@@ -16,6 +16,8 @@ namespace VinetkiBG.Data
 
         public DbSet<Vignette> Vignettes { get; set; }
 
+        public DbSet<Receipt> Receipts { get; set; }
+
         public VinetkiBGDbContext(DbContextOptions<VinetkiBGDbContext> options) : base(options)
         {
 
@@ -34,6 +36,14 @@ namespace VinetkiBG.Data
                 .HasOne(v => v.Vignette)
                 .WithOne(v => v.Vechile)
                 .HasForeignKey<Vignette>(f => f.VechileId);
+
+            builder.Entity<Vignette>()
+                .HasOne(r => r.Receipt)
+                .WithOne(v => v.Vignette);
+
+            builder.Entity<Receipt>()
+               .HasOne(v => v.Vignette)
+               .WithOne(v => v.Receipt);
 
             base.OnModelCreating(builder);
         }

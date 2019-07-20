@@ -63,7 +63,7 @@ namespace VinetkiBG.Controllers
                 price = 97;
             }
             this.vignneteService.BuyVignette(input.VignetteType, price, input.StartDate, endDate, input.VehicleId);
-            return this.Redirect("/Vignette/Success");
+            return this.Redirect("/Receipt/Generate");
         }
 
         [Authorize(Roles ="Admin")]
