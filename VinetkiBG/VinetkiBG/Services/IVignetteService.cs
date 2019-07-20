@@ -9,6 +9,6 @@ namespace VinetkiBG.Services
 {
     public interface IVignneteService
     {
-
+        void BuyVignette(string type, decimal price, DateTime starDate, DateTime endDate, string vehicleId);
     }
 }

@@ -8,10 +8,15 @@ namespace VinetkiBG.Models.BidingModels
 {
     public class PurchaseVignetteBidingModel
     {
+        //[Required]
+        //public string Id { get; set; }
         [Required]
         public string VignetteType { get; set; }
 
         [Required]
         public DateTime StartDate { get; set; }
+
+        [Required]
+        public string VehicleId { get; set; }
     }
 }

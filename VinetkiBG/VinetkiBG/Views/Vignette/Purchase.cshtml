@@ -1,9 +1,10 @@
 ﻿@model VinetkiBG.Models.BidingModels.PurchaseVignetteBidingModel
 @{
     ViewData["Title"] = "Purchase";
+    var id = ViewData["CarId"];
 }
 <h1 class="text-center mt-4">Purchase vignnete</h1>
-<form action="/" method="post" class="d-flex justify-content-center">
+<form method="post" class="d-flex justify-content-center">
     <table class="table table-striped w-75 mt-5">
         <thead>
             <tr>
@@ -15,8 +16,6 @@
         </thead>
         <tbody>
             <tr>
-                @*<th scope="row">@Model.Brand</th>
-                <td>@Model.LicencePlate</td>*@
                 <td>
                     <select asp-for="@Model.VignetteType" class="form-control">
                         <option selected>Select Vignnete</option>
@@ -26,11 +25,12 @@
                         <option value="Yearly">Yearly</option>
                     </select>
                 </td>
-                <td><input asp-for="@Model.StartDate" type="date" /></td>
+                <td><input asp-for="@Model.StartDate" type="datetime-local" /></td>
+                <td><input asp-for="@Model.VehicleId" type="hidden" value=@id/></td>
             </tr>
             <tr>
                 <td>
-                    <a href="/CreditCard/Details" class="btn btn-primary font-weight-bold">Buy Vignnete</a>
+                    <button type="submit" class="btn btn-primary font-weight-bold">Buy Vignette</button>
                 </td>
             </tr>
         </tbody>

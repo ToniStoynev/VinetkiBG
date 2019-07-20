@@ -21,25 +21,49 @@ namespace VinetkiBG.Controllers
             this.vignneteService = vignneteService;
             this.vehicleService = vehicleService;
         }
-        public IActionResult Purchase()
+        public IActionResult Purchase(string id)
         {
-            //var vehicle = this.vehicleService.GetVechileById(id);
-
-            //var model = new VehicleViewAllModel
-            //{
-            //    Brand = vehicle.Brand,
-            //    Country = vehicle.Country,
-            //    LicencePlate = vehicle.PlateNumber,
-            //    VehicleType = vehicle.VechileType
-            //};
-
-            return View();
+            ViewData["CarId"] = id;
+          
+            
+            return this.View();
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult Purchase(PurchaseVignetteBidingModel input)
         {
-            return null;
+            if (!ModelState.IsValid)
+            {
+                return this.View();
+            }
+
+
+            DateTime endDate = input.StartDate;
+            decimal price = 0.0M;
+
+            if (input.VignetteType == "Weekend")
+            {
+                endDate = input.StartDate.AddDays(3);
+                price = 10;
+            }
+            else if (input.VignetteType == "Weekly")
+            {
+                endDate = input.StartDate.AddDays(7);
+                price = 15;
+            }
+            else if (input.VignetteType == "Monthly")
+            {
+                endDate = input.StartDate.AddMonths(1);
+                price = 30;
+            }
+            else if (input.VignetteType == "Yearly")
+            {
+                endDate = input.StartDate.AddYears(1);
+                price = 97;
+            }
+            this.vignneteService.BuyVignette(input.VignetteType, price, input.StartDate, endDate, input.VehicleId);
+            return this.Redirect("/Vignette/Success");
         }
 
         [Authorize(Roles ="Admin")]

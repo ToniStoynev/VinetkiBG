@@ -11,7 +11,6 @@ namespace VinetkiBG.Domain
         public string Id { get; set; }
 
         [Required]
-        [StringLength(maximumLength: 2, ErrorMessage ="Category should be exatly 2 symbols", MinimumLength =2)]
         public string Caterory { get; set; }
 
         [Range(10, 150)]
