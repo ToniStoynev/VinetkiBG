@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VinetkiBG.Data;
+using VinetkiBG.Domain;
 using VinetkiBG.Models.BidingModels;
 using VinetkiBG.Models.ViewModels;
 using VinetkiBG.Services;
@@ -15,11 +16,14 @@ namespace VinetkiBG.Controllers
     {
         private readonly IVignneteService vignneteService;
         private readonly IVehicleService vehicleService;
+        private readonly IReceiptService receiptService;
 
-        public VignetteController(IVignneteService vignneteService, IVehicleService vehicleService)
+        public VignetteController(IVignneteService vignneteService, 
+            IVehicleService vehicleService, IReceiptService receiptService)
         {
             this.vignneteService = vignneteService;
             this.vehicleService = vehicleService;
+            this.receiptService = receiptService;
         }
         public IActionResult Purchase(string id)
         {
@@ -62,8 +66,24 @@ namespace VinetkiBG.Controllers
                 endDate = input.StartDate.AddYears(1);
                 price = 97;
             }
-            this.vignneteService.BuyVignette(input.VignetteType, price, input.StartDate, endDate, input.VehicleId);
-            return this.Redirect("/Receipt/Generate");
+            var vignette  = this.vignneteService.BuyVignette(input.VignetteType, price, input.StartDate, endDate, input.VehicleId);
+
+
+            var currentVehicle = this.vehicleService.GetVechileById(vignette.VechileId);
+
+
+            var receipt = new Receipt
+            {
+                LicensePlate = currentVehicle.PlateNumber,
+                VehicleType = currentVehicle.VechileType,
+                StartDate = input.StartDate,
+                EndDate = endDate,
+                Price = price,
+                VignetteId = vignette.Id 
+            };
+
+            var receiptInDb = this.receiptService.CreateReceipt(receipt);
+            return this.Redirect($"/Receipt/My/{receiptInDb.Id}");
         }
 
         [Authorize(Roles ="Admin")]

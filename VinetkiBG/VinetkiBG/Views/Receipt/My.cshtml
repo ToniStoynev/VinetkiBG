@@ -1,0 +1,38 @@
+﻿@model  VinetkiBG.Models.ViewModels.ReceiptMyViewModel
+@{
+    ViewData["Title"] = "My";
+}
+
+<h1 class="text-center">Receipt Details</h1>
+<hr>
+<div class="mx-auto w-50">
+    <div class="d-flex justify-content-between">
+        <h3>Receipt Number:</h3>
+        <h3>@Model.Id</h3>
+    </div>
+    <hr />
+    <div class="d-flex justify-content-between">
+        <h3>License Plate:</h3>
+        <h3>@Model.LicencePlate</h3>
+    </div>
+    <hr class="hr-2 bg-panda">
+    <div class="d-flex justify-content-between">
+        <h4>Vehicle Type</h4>
+        <h4>@Model.VehicleType</h4>
+    </div>
+    <hr>
+    <div class="d-flex justify-content-between">
+        <h4>Start Date:</h4>
+        <h4>@Model.StartDate.ToString()</h4>
+    </div>
+    <hr>
+    <div class="d-flex justify-content-between">
+        <h4>End Date:</h4>
+        <h4>@Model.EndDate.ToString()</h4>
+    </div>
+    <hr>
+    <div class="fee-holder d-flex justify-content-center">
+        <h3>Price: @Model.Price</h3>
+    </div>
+</div>
+

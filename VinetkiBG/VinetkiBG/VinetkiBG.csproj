@@ -19,9 +19,4 @@
     <ProjectReference Include="..\VinetkiBG.Domain\VinetkiBG.Domain.csproj" />
   </ItemGroup>
 
-
-  <ItemGroup>
-    <Folder Include="Views\Receipt\" />
-  </ItemGroup>
-
 </Project>

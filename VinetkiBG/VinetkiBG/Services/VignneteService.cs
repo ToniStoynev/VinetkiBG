@@ -17,7 +17,7 @@ namespace VinetkiBG.Services
             this.db = db;
         }
 
-        public void BuyVignette(string type, decimal price, DateTime starDate, 
+        public Vignette BuyVignette(string type, decimal price, DateTime starDate, 
             DateTime endDate, string vehicleID)
         {
             var vignette = new Vignette
@@ -30,6 +30,8 @@ namespace VinetkiBG.Services
             };
             this.db.Vignettes.Add(vignette);
             this.db.SaveChanges();
+
+            return vignette;
         }
     }
 }
