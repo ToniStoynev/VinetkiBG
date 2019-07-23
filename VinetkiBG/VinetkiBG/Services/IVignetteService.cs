@@ -13,5 +13,7 @@ namespace VinetkiBG.Services
 
         Vignette CheckVignette(string country, string licensePlate);
 
+        Vignette GetVignetteById(string id);
+
     }
 }

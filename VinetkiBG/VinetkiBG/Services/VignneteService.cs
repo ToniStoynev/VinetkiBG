@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -36,6 +37,7 @@ namespace VinetkiBG.Services
             this.db.Vignettes.Add(vignette);
 
             vehicle.VignetteId = vignette.Id;
+
             this.db.SaveChanges();
 
             return vignette;
@@ -43,8 +45,25 @@ namespace VinetkiBG.Services
 
         public Vignette CheckVignette(string country, string licensePlate)
         {
-           //this.db.Vignettes.Where(x => x.)
-                return null;
+            var vehicleFromdb = this.db.Vechiles
+            .Where(x => x.Country == country && x.PlateNumber == licensePlate)
+            .FirstOrDefault();
+
+            var vignette = this.db.Vignettes
+                .Where(x => x.Id == vehicleFromdb.VignetteId)
+                .FirstOrDefault();
+
+            return vignette;
+        }
+
+        public Vignette GetVignetteById(string id)
+        {
+            var vignette = this.db.Vignettes
+                .Include(x => x.Vechile)
+                .Where(x => x.Id == id)
+                .FirstOrDefault();
+
+            return vignette;
         }
     }
 }

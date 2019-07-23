@@ -95,15 +95,15 @@ namespace VinetkiBG.Controllers
         [HttpPost]
         public IActionResult VignetteCheck(VignetteCheckInputModel input)
         {
-            var vihicleFromDb = this.vehicleService
-                .GetVehicleByCountryAndLicensePlate(input.Country, input.PlateNumber);
+            var vignetteFromDb = this.vignneteService
+                .CheckVignette(input.Country, input.PlateNumber);
 
-            if (vihicleFromDb == null || vihicleFromDb.VignetteId == null)
+            if (vignetteFromDb == null)
             {
                 return this.Redirect("/Vignette/NotFoundVignette");
             }
 
-            return this.Redirect("/Vignette/Details");
+            return this.Redirect($"/Vignette/Details/{vignetteFromDb.Id}");
         }
 
         [Authorize(Roles = "Admin")]
@@ -113,9 +113,21 @@ namespace VinetkiBG.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public IActionResult Details()
+        public IActionResult Details(string id)
         {
-            return this.View();
+            var vignetteFromDb = this.vignneteService.GetVignetteById(id);
+
+            var model = new VignetteDetailsViewModel
+            {
+                Id = vignetteFromDb.Id,
+                VehicleType = vignetteFromDb.Vechile.VechileType,
+                StartDate = vignetteFromDb.StartDate,
+                EndDate = vignetteFromDb.EndDate,
+                Price  = vignetteFromDb.Price,
+                Status = "Active"
+            };
+
+            return this.View(model);
         }
     }
 }

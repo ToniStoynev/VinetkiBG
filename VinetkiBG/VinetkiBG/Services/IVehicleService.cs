@@ -14,7 +14,5 @@ namespace VinetkiBG.Services
         IEnumerable<VehicleViewAllModel> GetAll(string id);
 
         Vechile GetVechileById(string id);
-
-        Vechile GetVehicleByCountryAndLicensePlate(string country, string licensePlate);
     }
 }

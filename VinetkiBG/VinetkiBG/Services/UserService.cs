@@ -19,7 +19,11 @@ namespace VinetkiBG.Services
         }
         public VinetkiBGUser GetUserById(string id)
         {
-            return this.context.Users.Include(x=>x.Vechiles).FirstOrDefault(x => x.Id == id);
+            var user =  this.context.Users
+                .Include(x => x.Vechiles)
+                .FirstOrDefault(x => x.Id == id);
+
+            return user;
         }
 
         public int GetVehicleCountByUserId(string id)

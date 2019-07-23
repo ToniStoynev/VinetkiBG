@@ -1,7 +1,31 @@
-﻿
+﻿@model VinetkiBG.Models.ViewModels.VignetteDetailsViewModel
 @{
     ViewData["Title"] = "Details";
 }
+    
+<h1 class="text-center mt-4 font-weight-bold">Vignette Details</h1>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Id number of e-Vignette</th>
+            <th scope="col">Vehicle Type</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">End Date</th>
+            <th scope="col">Price</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.Id</td>
+            <td>@Model.VehicleType</td>
+            <td>@Model.StartDate</td>
+            <td>@Model.EndDate</td>
+            <td>@Model.Price</td>
+            <td>@Model.Status</td>
+        </tr>
+    </tbody>
+</table>
 
-<h1>Details</h1>
+
 
