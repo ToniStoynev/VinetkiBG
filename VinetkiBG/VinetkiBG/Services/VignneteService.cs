@@ -28,10 +28,23 @@ namespace VinetkiBG.Services
                 StartDate = starDate,
                 VechileId = vehicleID
             };
+
+            var vehicle = this.db.Vechiles
+                .Where(x => x.Id == vehicleID)
+                .FirstOrDefault();
+
             this.db.Vignettes.Add(vignette);
+
+            vehicle.VignetteId = vignette.Id;
             this.db.SaveChanges();
 
             return vignette;
+        }
+
+        public Vignette CheckVignette(string country, string licensePlate)
+        {
+           //this.db.Vignettes.Where(x => x.)
+                return null;
         }
     }
 }

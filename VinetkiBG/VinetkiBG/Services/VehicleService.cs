@@ -12,15 +12,15 @@ namespace VinetkiBG.Services
 {
     public class VehicleService : IVehicleService
     {
-        private readonly VinetkiBGDbContext context;
+        private readonly VinetkiBGDbContext db;
 
-        public VehicleService(VinetkiBGDbContext context)
+        public VehicleService(VinetkiBGDbContext db)
         {
-            this.context = context;
+            this.db = db;
         }
         public void CreateVehicle(string name, string type, string country, string plateNumber, string ownerId)
         {
-            var user = this.context.Users.FirstOrDefault(x => x.Id == ownerId);
+            var user = this.db.Users.FirstOrDefault(x => x.Id == ownerId);
 
             Vechile vechile = new Vechile
             {
@@ -32,15 +32,15 @@ namespace VinetkiBG.Services
             };
 
             user.Vechiles.Add(vechile);
-            this.context.SaveChanges();
+            this.db.SaveChanges();
         }
 
         public IEnumerable<VehicleViewAllModel> GetAll(string id)
         {
             ;
-            var all = context.Vechiles.ToList();
+            var all = db.Vechiles.ToList();
 
-            var result = this.context.Vechiles
+            var result = this.db.Vechiles
                 .Where(x => x.OwnerId == id)
                 .Select(x => new VehicleViewAllModel
                 {
@@ -57,11 +57,20 @@ namespace VinetkiBG.Services
 
         public Vechile GetVechileById(string id)
         {
-            var vehicle = this.context.Vechiles
+            var vehicle = this.db.Vechiles
                 .Where(x => x.Id == id)
                 .FirstOrDefault();
 
             return vehicle;
+        }
+
+        public Vechile GetVehicleByCountryAndLicensePlate(string country, string licensePlate)
+        {
+            var vehicleFromDb = this.db.Vechiles.Where(x => x.Country == country
+            && x.PlateNumber == licensePlate)
+                .FirstOrDefault();
+
+            return vehicleFromDb;
         }
     }
 }

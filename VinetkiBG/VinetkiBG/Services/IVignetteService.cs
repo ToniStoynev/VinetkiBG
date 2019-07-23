@@ -11,5 +11,7 @@ namespace VinetkiBG.Services
     {
         Vignette BuyVignette(string type, decimal price, DateTime starDate, DateTime endDate, string vehicleId);
 
+        Vignette CheckVignette(string country, string licensePlate);
+
     }
 }

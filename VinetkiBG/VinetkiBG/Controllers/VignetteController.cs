@@ -70,8 +70,7 @@ namespace VinetkiBG.Controllers
 
 
             var currentVehicle = this.vehicleService.GetVechileById(vignette.VechileId);
-
-
+    
             var receipt = new Receipt
             {
                 LicensePlate = currentVehicle.PlateNumber,
@@ -95,6 +94,26 @@ namespace VinetkiBG.Controllers
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult VignetteCheck(VignetteCheckInputModel input)
+        {
+            var vihicleFromDb = this.vehicleService
+                .GetVehicleByCountryAndLicensePlate(input.Country, input.PlateNumber);
+
+            if (vihicleFromDb == null || vihicleFromDb.VignetteId == null)
+            {
+                return this.Redirect("/Vignette/NotFoundVignette");
+            }
+
+            return this.Redirect("/Vignette/Details");
+        }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult NotFoundVignette()
+        {
+            return this.View();
+        }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult Details()
         {
             return this.View();
         }

@@ -5,15 +5,18 @@
 
 <h1 class="text-center mt-4">Check validity for e-Vignette</h1>
 <div class="d-flex justify-content-center mt-5">
-    <form class="form-inline">
-        <div class="form-group mb-2">
-            <label asp-for="@Model.Country" class="sr-only"></label>
+    <form method="post" class="form-inline">
+        <div class="form-group mb-2 font-weight-bold d-flex flex-column">
+            <label asp-for="@Model.Country" class="control-label"></label>
             <input asp-for="@Model.Country" type="text" class="form-control">
         </div>
-        <div class="form-group mx-sm-3 mb-2">
-            <label asp-for="@Model.PlateNumber" class="sr-only"></label>
+        <div class="form-group mx-sm-3 mb-2 font-weight-bold d-flex flex-column">
+            <label asp-for="@Model.PlateNumber">License Plate</label>
             <input asp-for="@Model.PlateNumber" type="text" class="form-control">
         </div>
-        <button type="submit" class="btn btn-primary mb-2">Check</button>
+        <div class="d-flex flex-column">
+            <label>   </label>
+            <button type="submit" class="btn btn-primary mt-3 font-weight-bold">Check</button>
+        </div>    
     </form>
 </div>
