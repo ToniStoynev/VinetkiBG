@@ -3,29 +3,31 @@
     ViewData["Title"] = "Details";
 }
     
-<h1 class="text-center mt-4 font-weight-bold">Vignette Details</h1>
-<table class="table">
-    <thead class="thead-dark">
-        <tr>
-            <th scope="col">Id number of e-Vignette</th>
-            <th scope="col">Vehicle Type</th>
-            <th scope="col">Start Date</th>
-            <th scope="col">End Date</th>
-            <th scope="col">Price</th>
-            <th scope="col">Status</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>@Model.Id</td>
-            <td>@Model.VehicleType</td>
-            <td>@Model.StartDate</td>
-            <td>@Model.EndDate</td>
-            <td>@Model.Price</td>
-            <td>@Model.Status</td>
-        </tr>
-    </tbody>
-</table>
+<h1 class="text-center font-weight-bold mx-5">Vignette Details</h1>
+<div class="d-flex justify-content-center w-75 mx-auto mt-5">
+    <table class="table table-responsive">
+        <thead class="bg-primary text-light font-weight-bold">
+            <tr class="text-center">
+                <th scope="col" >Id number of e-Vignette</th>
+                <th scope="col">Vehicle Type</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Price</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody class="table-bordered table-active table-light  font-weight-bold">
+            <tr>
+                <td>@Model.Id</td>
+                <td>@Model.VehicleType</td>
+                <td>@Model.StartDate</td>
+                <td>@Model.EndDate</td>
+                <td>@Model.Price</td>
+                <td>@Model.Status</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 
 

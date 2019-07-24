@@ -49,9 +49,19 @@ namespace VinetkiBG.Services
             .Where(x => x.Country == country && x.PlateNumber == licensePlate)
             .FirstOrDefault();
 
+            if (vehicleFromdb == null)
+            {
+                return null;
+            }
+
             var vignette = this.db.Vignettes
                 .Where(x => x.Id == vehicleFromdb.VignetteId)
                 .FirstOrDefault();
+
+            if (vignette == null)
+            {
+                return null;
+            }
 
             return vignette;
         }

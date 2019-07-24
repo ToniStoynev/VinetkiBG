@@ -95,6 +95,7 @@ namespace VinetkiBG.Controllers
         [HttpPost]
         public IActionResult VignetteCheck(VignetteCheckInputModel input)
         {
+
             var vignetteFromDb = this.vignneteService
                 .CheckVignette(input.Country, input.PlateNumber);
 
