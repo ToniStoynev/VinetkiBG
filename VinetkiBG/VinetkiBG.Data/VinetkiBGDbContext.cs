@@ -18,6 +18,8 @@ namespace VinetkiBG.Data
 
         public DbSet<Receipt> Receipts { get; set; }
 
+        public DbSet<Violation> Violations { get; set; }
+
         public VinetkiBGDbContext(DbContextOptions<VinetkiBGDbContext> options) : base(options)
         {
 
@@ -28,6 +30,10 @@ namespace VinetkiBG.Data
             builder.Entity<VinetkiBGUser>()
                 .HasMany(x => x.Vechiles)
                 .WithOne(x => x.Owner);
+
+            builder.Entity<VinetkiBGUser>()
+               .HasMany(x => x.Violations)
+               .WithOne(x => x.Violator);
 
             builder.Entity<Vechile>()
                 .HasOne(o => o.Owner);
@@ -44,6 +50,14 @@ namespace VinetkiBG.Data
             builder.Entity<Receipt>()
                .HasOne(v => v.Vignette)
                .WithOne(v => v.Receipt);
+
+            builder.Entity<Violation>()
+                .HasOne(v => v.Vehicle)
+                .WithMany(v => v.Violations);
+
+            builder.Entity<Violation>()
+                .HasOne(v => v.Violator)
+                .WithMany(v => v.Violations);
 
             base.OnModelCreating(builder);
         }

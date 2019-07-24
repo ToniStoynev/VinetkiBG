@@ -7,6 +7,10 @@ namespace VinetkiBG.Domain
 {
     public class Vechile
     {
+        public Vechile()
+        {
+            this.Violations = new HashSet<Violation>();
+        }
         public string Id { get; set; }
 
         [StringLength(maximumLength:12, ErrorMessage ="Brand must be between 2 and 12 symbols", MinimumLength =2)]
@@ -30,6 +34,8 @@ namespace VinetkiBG.Domain
 
         public string VignetteId { get; set; }
         public Vignette Vignette { get; set; }
+
+        public ICollection<Violation> Violations { get; set; }
 
     }
 }
