@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace VinetkiBG.Domain
+namespace VinetkiBG.Models.BidingModels
 {
-    public class Violation
+    public class ViolationRegisterBindingModel
     {
-        public string Id { get; set; }
 
         [Required]
         public string ViolationType { get; set; }
@@ -15,19 +15,11 @@ namespace VinetkiBG.Domain
         [Required]
         public string Road { get; set; }
 
+        [Required]
         public DateTime ViolationDate { get; set; }
 
         [Required]
+        [Range(70, 1800)]
         public decimal PenaltyAmount { get; set; }
-
-        [Required]
-        public string VehicleId { get; set; }
-
-        public Vechile Vehicle { get; set; }
-
-        [Required]
-        public string UserId { get; set; }
-
-        public VinetkiBGUser User { get; set; }
     }
 }

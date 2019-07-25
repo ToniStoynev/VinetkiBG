@@ -55,6 +55,15 @@ namespace VinetkiBG.Services
             return result;
         }
 
+        public Vechile GetVechileByCountryAndLicensePlate(string country, string licensePlate)
+        {
+            var vehicle = this.db.Vechiles
+                .Where(x => x.Country == country && x.PlateNumber == licensePlate)
+                .FirstOrDefault();
+
+            return vehicle;
+        }
+
         public Vechile GetVechileById(string id)
         {
             var vehicle = this.db.Vechiles

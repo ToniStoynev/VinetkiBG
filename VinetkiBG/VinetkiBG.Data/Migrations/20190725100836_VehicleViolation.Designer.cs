@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VinetkiBG.Data;
 
 namespace VinetkiBG.Data.Migrations
 {
     [DbContext(typeof(VinetkiBGDbContext))]
-    partial class VinetkiBGDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190725100836_VehicleViolation")]
+    partial class VehicleViolation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -294,12 +296,14 @@ namespace VinetkiBG.Data.Migrations
                     b.Property<string>("ViolationType")
                         .IsRequired();
 
-                    b.HasKey("Id");
+                    b.Property<string>("ViolatorId");
 
-                    b.HasIndex("UserId");
+                    b.HasKey("Id");
 
                     b.HasIndex("VehicleId")
                         .IsUnique();
+
+                    b.HasIndex("ViolatorId");
 
                     b.ToTable("Violations");
                 });
@@ -374,15 +378,14 @@ namespace VinetkiBG.Data.Migrations
 
             modelBuilder.Entity("VinetkiBG.Domain.Violation", b =>
                 {
-                    b.HasOne("VinetkiBG.Domain.VinetkiBGUser", "User")
-                        .WithMany("Violations")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("VinetkiBG.Domain.Vechile", "Vehicle")
                         .WithOne("Violation")
                         .HasForeignKey("VinetkiBG.Domain.Violation", "VehicleId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("VinetkiBG.Domain.VinetkiBGUser", "Violator")
+                        .WithMany("Violations")
+                        .HasForeignKey("ViolatorId");
                 });
 #pragma warning restore 612, 618
         }

@@ -23,7 +23,16 @@
                 <td>@Model.StartDate</td>
                 <td>@Model.EndDate</td>
                 <td>@Model.Price</td>
-                <td>@Model.Status</td>
+                @if (Model.Status == "Expired")
+                {
+                    <td class="bg-warning">
+                        <a href="/Violation/Register/">@Model.Status</a> 
+                    </td>
+                }
+                else
+                {
+                    <td>@Model.Status</td>
+                }
             </tr>
         </tbody>
     </table>

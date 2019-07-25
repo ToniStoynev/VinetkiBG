@@ -96,12 +96,19 @@ namespace VinetkiBG.Controllers
         public IActionResult VignetteCheck(VignetteCheckInputModel input)
         {
 
-            var vignetteFromDb = this.vignneteService
-                .CheckVignette(input.Country, input.PlateNumber);
+            var vechileFromDb = this.vehicleService
+                .GetVechileByCountryAndLicensePlate(input.Country, input.PlateNumber);
+
+            if (vechileFromDb == null)
+            {
+                return this.Redirect("/Violation/NotFoundVehicle");
+            }
+
+            var vignetteFromDb = this.vignneteService.CheckVignette(input.Country, input.PlateNumber);
 
             if (vignetteFromDb == null)
             {
-                return this.Redirect("/Vignette/NotFoundVignette");
+                return this.Redirect($"/Violation/Register/{vechileFromDb.Id}");
             }
 
             return this.Redirect($"/Vignette/Details/{vignetteFromDb.Id}");
@@ -118,6 +125,13 @@ namespace VinetkiBG.Controllers
         {
             var vignetteFromDb = this.vignneteService.GetVignetteById(id);
 
+            string status = "Active";
+
+            if (vignetteFromDb.EndDate < DateTime.UtcNow)
+            {
+                status = "Expired";
+            }
+
             var model = new VignetteDetailsViewModel
             {
                 Id = vignetteFromDb.Id,
@@ -125,7 +139,7 @@ namespace VinetkiBG.Controllers
                 StartDate = vignetteFromDb.StartDate,
                 EndDate = vignetteFromDb.EndDate,
                 Price  = vignetteFromDb.Price,
-                Status = "Active"
+                Status = status
             };
 
             return this.View(model);
