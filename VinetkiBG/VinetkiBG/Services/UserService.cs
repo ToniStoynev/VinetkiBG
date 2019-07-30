@@ -11,15 +11,15 @@ namespace VinetkiBG.Services
 {
     public class UserService : IUserService
     {
-        private readonly VinetkiBGDbContext context;
+        private readonly VinetkiBGDbContext db;
 
-        public UserService(VinetkiBGDbContext context)
+        public UserService(VinetkiBGDbContext db)
         {
-            this.context = context;
+            this.db = db;
         }
         public VinetkiBGUser GetUserById(string id)
         {
-            var user =  this.context.Users
+            var user =  this.db.Users
                 .Include(x => x.Vechiles)
                 .FirstOrDefault(x => x.Id == id);
 
@@ -28,9 +28,10 @@ namespace VinetkiBG.Services
 
         public int GetVehicleCountByUserId(string id)
         {
-            var result = context.Users.Where(x => x.Id == id).Select(x => x.Vechiles.Count()).FirstOrDefault();
+            var result = db.Users.Where(x => x.Id == id).Select(x => x.Vechiles.Count()).FirstOrDefault();
 
             return result;
         }
+
     }
 }

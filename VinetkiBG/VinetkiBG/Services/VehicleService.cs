@@ -48,7 +48,8 @@ namespace VinetkiBG.Services
                     Brand = x.Brand,
                     VehicleType = x.VechileType,
                     Country = x.Country,
-                    LicencePlate = x.PlateNumber
+                    LicencePlate = x.PlateNumber,
+                    ViolationId = x.ViolationId
                 })
                 .ToList();
 

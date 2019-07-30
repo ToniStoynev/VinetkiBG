@@ -18,5 +18,7 @@ namespace VinetkiBG.Models.ViewModels
         public decimal Price { get; set; }
 
         public string Status { get; set; }
+
+        public string VehicleId { get; set; }
     }
 }

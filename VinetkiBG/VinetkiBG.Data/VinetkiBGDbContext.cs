@@ -31,10 +31,6 @@ namespace VinetkiBG.Data
                 .HasMany(x => x.Vechiles)
                 .WithOne(x => x.Owner);
 
-            builder.Entity<VinetkiBGUser>()
-               .HasMany(x => x.Violations)
-               .WithOne(x => x.User);
-
             builder.Entity<Vechile>()
                 .HasOne(o => o.Owner);
 
@@ -59,10 +55,6 @@ namespace VinetkiBG.Data
             builder.Entity<Violation>()
                 .HasOne(v => v.Vehicle)
                 .WithOne(v => v.Violation);
-
-            builder.Entity<Violation>()
-                .HasOne(v => v.User)
-                .WithMany(u => u.Violations);
 
             base.OnModelCreating(builder);
         }

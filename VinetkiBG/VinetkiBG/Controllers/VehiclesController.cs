@@ -49,6 +49,8 @@ namespace VinetkiBG.Controllers
             var id = manager.GetUserId(this.User);
 
             var viewModel = this.vehicleService.GetAll(id);
+
+
             return this.View(viewModel);
         }
     }

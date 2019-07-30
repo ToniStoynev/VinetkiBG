@@ -14,7 +14,7 @@
                 <th scope="col" class="col-lg-2 suls-text-color">Country</th>
                 <th scope="col" class="col-lg-2 suls-text-color">Licence Plate</th>
                 <th scope="col" class="col-lg-2 suls-text-color">E-Vignnete</th>
-                <th scope="col" class="col-lg-2 suls-text-color">Remove Car</th>
+                <th scope="col" class="col-lg-2 suls-text-color">Check for Violation</th>
             </tr>
         </thead>
         <tbody>
@@ -29,7 +29,14 @@
                       <a href="/Vignette/Purchase?id=@vehicle.Id" class="btn btn-primary">Purchase vignnete</a> 
                     </td>
                     <td class="col-lg-2 suls-text-color">
-                        <a href="/Submissions/Delete?id=@vehicle.Id" class="btn btn-primary" id="remove">Remove</a>
+                        @if (vehicle.ViolationId == null)
+                        {
+                            <a href="/Violation/NotFound" class="btn btn-primary" id="violation">See Violations</a>
+                        }
+                        else
+                        {
+                            <a href="/Violation/Details/@vehicle.ViolationId" class="btn btn-primary" id="violation">See Violations</a>
+                        }
                     </td>
                 </tr>
             }

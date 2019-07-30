@@ -1,28 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace VinetkiBG.Models.BidingModels
+namespace VinetkiBG.Models.ViewModels
 {
-    public class ViolationRegisterBindingModel
+    public class ViolationDetailsViewModel
     {
+        public string Id { get; set; }
 
-        [Required]
         public string ViolationType { get; set; }
 
-        [Required]
         public string Road { get; set; }
 
-        [Required]
         public DateTime ViolationDate { get; set; }
 
-        [Required]
-        [Range(70, 1800)]
         public decimal PenaltyAmount { get; set; }
 
-        [Required]
         public string VehicleId { get; set; }
+
     }
 }

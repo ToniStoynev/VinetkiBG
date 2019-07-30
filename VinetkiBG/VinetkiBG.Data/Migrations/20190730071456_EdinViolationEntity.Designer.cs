@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VinetkiBG.Data;
 
 namespace VinetkiBG.Data.Migrations
 {
     [DbContext(typeof(VinetkiBGDbContext))]
-    partial class VinetkiBGDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190730071456_EdinViolationEntity")]
+    partial class EdinViolationEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -286,6 +288,8 @@ namespace VinetkiBG.Data.Migrations
                     b.Property<string>("VehicleId")
                         .IsRequired();
 
+                    b.Property<string>("VinetkiBGUserId");
+
                     b.Property<DateTime>("ViolationDate");
 
                     b.Property<string>("ViolationType")
@@ -295,6 +299,8 @@ namespace VinetkiBG.Data.Migrations
 
                     b.HasIndex("VehicleId")
                         .IsUnique();
+
+                    b.HasIndex("VinetkiBGUserId");
 
                     b.ToTable("Violations");
                 });
@@ -373,6 +379,10 @@ namespace VinetkiBG.Data.Migrations
                         .WithOne("Violation")
                         .HasForeignKey("VinetkiBG.Domain.Violation", "VehicleId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("VinetkiBG.Domain.VinetkiBGUser")
+                        .WithMany("Violations")
+                        .HasForeignKey("VinetkiBGUserId");
                 });
 #pragma warning restore 612, 618
         }

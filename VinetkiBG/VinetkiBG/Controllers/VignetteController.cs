@@ -139,7 +139,8 @@ namespace VinetkiBG.Controllers
                 StartDate = vignetteFromDb.StartDate,
                 EndDate = vignetteFromDb.EndDate,
                 Price  = vignetteFromDb.Price,
-                Status = status
+                Status = status,
+                VehicleId = vignetteFromDb.VechileId
             };
 
             return this.View(model);

@@ -25,9 +25,6 @@ namespace VinetkiBG.Domain
 
         public Vechile Vehicle { get; set; }
 
-        [Required]
-        public string UserId { get; set; }
-
-        public VinetkiBGUser User { get; set; }
+  
     }
 }
