@@ -25,6 +25,8 @@ namespace VinetkiBG.Controllers
             this.vehicleService = vehicleService;
             this.receiptService = receiptService;
         }
+
+        [Authorize]
         public IActionResult Purchase(string id)
         {
             ViewData["CarId"] = id;
@@ -85,65 +87,6 @@ namespace VinetkiBG.Controllers
             return this.Redirect($"/Receipt/My/{receiptInDb.Id}");
         }
 
-        [Authorize(Roles ="Admin")]
-        public IActionResult VignetteCheck()
-        {
-            return this.View();
-        }
-
-        [Authorize(Roles = "Admin")]
-        [HttpPost]
-        public IActionResult VignetteCheck(VignetteCheckInputModel input)
-        {
-
-            var vechileFromDb = this.vehicleService
-                .GetVechileByCountryAndLicensePlate(input.Country, input.PlateNumber);
-
-            if (vechileFromDb == null)
-            {
-                return this.Redirect("/Violation/NotFoundVehicle");
-            }
-
-            var vignetteFromDb = this.vignneteService.CheckVignette(input.Country, input.PlateNumber);
-
-            if (vignetteFromDb == null)
-            {
-                return this.Redirect($"/Violation/Register/{vechileFromDb.Id}");
-            }
-
-            return this.Redirect($"/Vignette/Details/{vignetteFromDb.Id}");
-        }
-
-        [Authorize(Roles = "Admin")]
-        public IActionResult NotFoundVignette()
-        {
-            return this.View();
-        }
-
-        [Authorize(Roles = "Admin")]
-        public IActionResult Details(string id)
-        {
-            var vignetteFromDb = this.vignneteService.GetVignetteById(id);
-
-            string status = "Active";
-
-            if (vignetteFromDb.EndDate < DateTime.UtcNow)
-            {
-                status = "Expired";
-            }
-
-            var model = new VignetteDetailsViewModel
-            {
-                Id = vignetteFromDb.Id,
-                VehicleType = vignetteFromDb.Vechile.VechileType,
-                StartDate = vignetteFromDb.StartDate,
-                EndDate = vignetteFromDb.EndDate,
-                Price  = vignetteFromDb.Price,
-                Status = status,
-                VehicleId = vignetteFromDb.VechileId
-            };
-
-            return this.View(model);
-        }
+       
     }
 }

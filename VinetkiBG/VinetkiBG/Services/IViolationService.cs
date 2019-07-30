@@ -14,5 +14,7 @@ namespace VinetkiBG.Services
         Violation GetViolationById(string id);
 
         IQueryable<Violation> GetAllViolationsForVehicle(string id);
+
+      
     }
 }

@@ -48,6 +48,7 @@ namespace VinetkiBG.Controllers
             return this.View();
         }
 
+        [HttpGet]
         public IActionResult Details(string id)
         {
             var violationFromDb = this.violationService.GetViolationById(id);
@@ -63,6 +64,12 @@ namespace VinetkiBG.Controllers
             };
 
             return this.View(model);
+        }
+
+        [Authorize]
+        public IActionResult NotFound()
+        {
+            return this.View(); 
         }
     }
 }
