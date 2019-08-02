@@ -28,7 +28,9 @@ namespace VinetkiBG.Services
 
         public int GetVehicleCountByUserId(string id)
         {
-            var result = db.Users.Where(x => x.Id == id).Select(x => x.Vechiles.Count()).FirstOrDefault();
+            var result = db.Users.Where(x => x.Id == id)
+                .Select(x => x.Vechiles.Count())
+                .FirstOrDefault();
 
             return result;
         }

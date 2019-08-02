@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VinetkiBG.Data;
 using VinetkiBG.Domain;
+using VinetkiBG.Models.ServiceModels;
 using VinetkiBG.Models.ViewModels;
 
 namespace VinetkiBG.Services
@@ -18,62 +19,80 @@ namespace VinetkiBG.Services
             this.db = db;
         }
 
-        public Vignette BuyVignette(string type, decimal price, DateTime starDate, 
-            DateTime endDate, string vehicleID)
+        public string BuyVignette(VignetteServiceModel vignetteServiceModel)
         {
             var vignette = new Vignette
             {
-                Caterory = type,
-                Price = price,
-                EndDate = endDate,
-                StartDate = starDate,
-                VechileId = vehicleID
+                Caterory = vignetteServiceModel.Category,
+                Price = vignetteServiceModel.Price,
+                EndDate = vignetteServiceModel.EndDate,
+                StartDate = vignetteServiceModel.StartDate,
+                VechileId = vignetteServiceModel.VehicleId
             };
 
-            var vehicle = this.db.Vechiles
-                .Where(x => x.Id == vehicleID)
-                .FirstOrDefault();
+            var vehicleFromDb = this.db.Vechiles
+                .SingleOrDefault(x => x.Id == vignetteServiceModel.VehicleId);
 
             this.db.Vignettes.Add(vignette);
 
-            vehicle.VignetteId = vignette.Id;
+            vehicleFromDb.VignetteId = vignette.Id;
 
             this.db.SaveChanges();
 
-            return vignette;
+            return vignette.Id;
         }
 
-        public Vignette CheckVignette(string country, string licensePlate)
+        public VignetteServiceModel CheckVignette(CheckVehicleServiceModel checkVehicleServiceModel)
         {
             var vehicleFromdb = this.db.Vechiles
-            .Where(x => x.Country == country && x.PlateNumber == licensePlate)
-            .FirstOrDefault();
+            .SingleOrDefault(x => x.Country == checkVehicleServiceModel.Country
+            && x.PlateNumber == checkVehicleServiceModel.LicensePlate);
 
             if (vehicleFromdb == null)
             {
                 return null;
             }
 
-            var vignette = this.db.Vignettes
-                .Where(x => x.Id == vehicleFromdb.VignetteId)
-                .FirstOrDefault();
+            var vignetteFromDb = this.db.Vignettes
+                .FirstOrDefault(x => x.Id == vehicleFromdb.VignetteId);
 
-            if (vignette == null)
+            if (vignetteFromDb == null)
             {
                 return null;
             }
 
-            return vignette;
+            var vignetteServiceModel = new VignetteServiceModel
+            {
+                Id = vignetteFromDb.Id,
+                Category = vignetteFromDb.Caterory,
+                Price = vignetteFromDb.Price,
+                StartDate = vignetteFromDb.StartDate,
+                EndDate = vignetteFromDb.EndDate,
+                VehicleId = vignetteFromDb.VechileId
+            };
+
+            return vignetteServiceModel;
         }
 
-        public Vignette GetVignetteById(string id)
+        public VignetteServiceModel GetVignetteById(string id)
         {
-            var vignette = this.db.Vignettes
+            var vignetteFromDb = this.db.Vignettes
                 .Include(x => x.Vechile)
                 .Where(x => x.Id == id)
                 .FirstOrDefault();
 
-            return vignette;
+            var vignetteServiceModel = new VignetteServiceModel
+            {
+                Id = vignetteFromDb.Id,
+                Category = vignetteFromDb.Caterory,
+                StartDate = vignetteFromDb.StartDate,
+                EndDate = vignetteFromDb.EndDate,
+                Price = vignetteFromDb.Price,
+                VehicleId = vignetteFromDb.VechileId,
+                VehicleType = vignetteFromDb.Vechile.VechileType
+            };
+
+            return vignetteServiceModel;
         }
     }
 }

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using VinetkiBG.Data;
 using VinetkiBG.Domain;
+using VinetkiBG.Models.BidingModels;
+using VinetkiBG.Models.ServiceModels;
 
 namespace VinetkiBG.Services
 {
@@ -16,22 +18,26 @@ namespace VinetkiBG.Services
             this.db = db;
         }
 
-        public IQueryable<Violation> GetAllViolationsForVehicle(string id)
-        {
-            return this.db.Violations
-                .Where(x => x.VehicleId == id);
-        }
-
-        public Violation GetViolationById(string id)
+        public ViolationServiceModel GetViolationById(string id)
         {
             var violationFromDb = this.db.Violations
-                 .FirstOrDefault(x => x.Id == id);
+                 .SingleOrDefault(x => x.Id == id);
 
-            return violationFromDb;
+            var violationServiceModel = new ViolationServiceModel
+            {
+                Id = violationFromDb.Id,
+                ViolationType = violationFromDb.ViolationType,
+                Road = violationFromDb.Road,
+                PenaltyAmount = violationFromDb.PenaltyAmount,
+                ViolationDate = violationFromDb.ViolationDate,
+                VehicleId = violationFromDb.VehicleId
+            };
+
+            return violationServiceModel;
         }
 
-        public Violation RegisterViolation(string violationType, string Road, 
-            DateTime violationDate, decimal penaltyAmount, string vehicleId)
+        public Violation RegisterViolation(string violationType, string Road,
+             DateTime violationDate, decimal penaltyAmount, string vehicleId)
         {
             var violation = new Violation
             {
@@ -46,13 +52,13 @@ namespace VinetkiBG.Services
 
             var vehicle = this.db.Vechiles.FirstOrDefault(x => x.Id == vehicleId);
 
-            vehicle.ViolationId = violation.Id; 
+            vehicle.ViolationId = violation.Id;
 
             this.db.SaveChanges();
 
             return violation;
         }
 
-     
+
     }
 }

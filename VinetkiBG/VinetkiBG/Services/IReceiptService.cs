@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VinetkiBG.Domain;
+using VinetkiBG.Models.ServiceModels;
 
 namespace VinetkiBG.Services
 {
     public interface IReceiptService
     {
-        Receipt CreateReceipt(Receipt receipt);
+        string CreateReceipt(ReceiptServiceModel receiptServiceModel);
 
-        Receipt GetReceiptById(string id);
+        ReceiptServiceModel GetReceiptById(string id);
     }
 }

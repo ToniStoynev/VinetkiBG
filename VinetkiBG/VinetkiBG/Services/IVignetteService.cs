@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VinetkiBG.Domain;
+using VinetkiBG.Models.ServiceModels;
 using VinetkiBG.Models.ViewModels;
 
 namespace VinetkiBG.Services
 {
     public interface IVignneteService
     {
-        Vignette BuyVignette(string type, decimal price, DateTime starDate, DateTime endDate, string vehicleId);
+        string BuyVignette(VignetteServiceModel vignetteServiceModel);
 
-        Vignette CheckVignette(string country, string licensePlate);
+        VignetteServiceModel CheckVignette(CheckVehicleServiceModel checkVehicleServiceModel);
 
-        Vignette GetVignetteById(string id);
+        VignetteServiceModel GetVignetteById(string id);
 
     }
 }

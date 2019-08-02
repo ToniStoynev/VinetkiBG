@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using VinetkiBG.Domain;
 using VinetkiBG.Models.BidingModels;
+using VinetkiBG.Models.ServiceModels;
 using VinetkiBG.Services;
 
 namespace VinetkiBG.Controllers
@@ -36,9 +37,24 @@ namespace VinetkiBG.Controllers
             {
                 return this.Redirect("/Vehicles/Add");
             }
+
             var currentUserId = manager.GetUserId(this.User);
 
-            this.vehicleService.CreateVehicle(model.FriendlyName, model.Type, model.Country, model.PlateNumber, currentUserId);
+            VehicleServiceModel vehicleServiceModel = new VehicleServiceModel
+            {
+                Brand = model.FriendlyName,
+                Country = model.Country,
+                PlateNumber = model.PlateNumber,
+                VehicleType = model.Type,
+                OwnerId = currentUserId
+            };
+
+            var isRegisterdNewVehicle = this.vehicleService.CreateVehicle(vehicleServiceModel);
+
+            if (!isRegisterdNewVehicle)
+            {
+                return this.Redirect("/Vehicles/UnsecessfullRegistration");
+            }
 
             return this.Redirect("/Vehicles/All");
         }
@@ -48,8 +64,9 @@ namespace VinetkiBG.Controllers
         {
             var id = manager.GetUserId(this.User);
 
-            var viewModel = this.vehicleService.GetAll(id);
-
+            var viewModel = this.vehicleService
+                .GetAll(id)
+                .ToList();
 
             return this.View(viewModel);
         }

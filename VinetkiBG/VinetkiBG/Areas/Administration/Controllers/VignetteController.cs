@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VinetkiBG.Models.BidingModels;
+using VinetkiBG.Models.ServiceModels;
 using VinetkiBG.Models.ViewModels;
 using VinetkiBG.Services;
 
@@ -29,20 +30,25 @@ namespace VinetkiBG.Areas.Administration.Controllers
         [HttpPost]
         public IActionResult VignetteCheck(VignetteCheckInputModel input)
         {
+            var checkVehicleServiceModel = new CheckVehicleServiceModel
+            {
+                Country = input.Country,
+                LicensePlate = input.PlateNumber
+            };
 
             var vechileFromDb = this.vehicleService
-                .GetVechileByCountryAndLicensePlate(input.Country, input.PlateNumber);
+                .GetVechileByCountryAndLicensePlate(checkVehicleServiceModel);
 
             if (vechileFromDb == null)
             {
-                return this.Redirect("/Violation/NotFoundVehicle");
+                return this.Redirect("/Administration/Violation/NotFoundVehicle");
             }
 
-            var vignetteFromDb = this.vignneteService.CheckVignette(input.Country, input.PlateNumber);
+            var vignetteFromDb = this.vignneteService.CheckVignette(checkVehicleServiceModel);
 
             if (vignetteFromDb == null && vechileFromDb.ViolationId == null)
             {
-                return this.Redirect($"/Violation/Register/{vechileFromDb.Id}");
+                return this.Redirect($"/Administration/Violation/Register/{vechileFromDb.ViolationId}");
             }
 
             if (vignetteFromDb == null && vechileFromDb.ViolationId != null)
@@ -73,12 +79,12 @@ namespace VinetkiBG.Areas.Administration.Controllers
             var model = new VignetteDetailsViewModel
             {
                 Id = vignetteFromDb.Id,
-                VehicleType = vignetteFromDb.Vechile.VechileType,
+                VehicleType = vignetteFromDb.VehicleType,
                 StartDate = vignetteFromDb.StartDate,
                 EndDate = vignetteFromDb.EndDate,
                 Price = vignetteFromDb.Price,
                 Status = status,
-                VehicleId = vignetteFromDb.VechileId
+                VehicleId = vignetteFromDb.VehicleId
             };
 
             return this.View(model);

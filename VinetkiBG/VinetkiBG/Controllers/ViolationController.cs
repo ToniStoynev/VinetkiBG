@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VinetkiBG.Models.BidingModels;
+using VinetkiBG.Models.ServiceModels;
 using VinetkiBG.Models.ViewModels;
 using VinetkiBG.Services;
 
@@ -16,38 +17,13 @@ namespace VinetkiBG.Controllers
         private readonly IVehicleService vehicleService;
         private readonly IUserService userService;
 
-        public ViolationController(IViolationService violationService, IVehicleService vehicleService, 
+        public ViolationController(IViolationService violationService, IVehicleService vehicleService,
             IUserService userService)
         {
             this.violationService = violationService;
             this.vehicleService = vehicleService;
             this.userService = userService;
         }
-
-        [Authorize(Roles ="Admin")]
-        public IActionResult Register(string id)
-        {
-            ViewData["vehicleId"] = id;
-            return View();
-        }
-
-        [Authorize(Roles = "Admin")]
-        [HttpPost]
-        public IActionResult Register(ViolationRegisterBindingModel model)
-        {
-
-            var violation = this.violationService.RegisterViolation(model.ViolationType, model.Road, model.ViolationDate, model.PenaltyAmount, model.VehicleId);
-
-            return this.Redirect($"/Violation/Details/{violation.Id}");
-        }
-
-
-        [Authorize(Roles = "Admin")]
-        public IActionResult NotFoundVehicle()
-        {
-            return this.View();
-        }
-
         [HttpGet]
         public IActionResult Details(string id)
         {

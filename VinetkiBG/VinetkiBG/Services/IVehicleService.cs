@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VinetkiBG.Domain;
+using VinetkiBG.Models.ServiceModels;
 using VinetkiBG.Models.ViewModels;
 
 namespace VinetkiBG.Services
 {
     public interface IVehicleService
     {
-        void CreateVehicle(string name, string type, string country, string plateNumber, string ownerId);
+        bool CreateVehicle(VehicleServiceModel vehicleServiceModel);
 
-        IEnumerable<VehicleViewAllModel> GetAll(string id);
+        IQueryable<VehicleViewAllModel> GetAll(string id);
 
-        Vechile GetVechileById(string id);
+        VehicleServiceModel GetVechileById(string id);
 
-        Vechile GetVechileByCountryAndLicensePlate(string country, string licensePlate);
+        VehicleServiceModel GetVechileByCountryAndLicensePlate(CheckVehicleServiceModel checkVehicleServiceModel);
     }
 }

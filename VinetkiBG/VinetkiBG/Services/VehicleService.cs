@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VinetkiBG.Data;
 using VinetkiBG.Domain;
+using VinetkiBG.Models.ServiceModels;
 using VinetkiBG.Models.ViewModels;
 
 namespace VinetkiBG.Services
@@ -18,28 +19,35 @@ namespace VinetkiBG.Services
         {
             this.db = db;
         }
-        public void CreateVehicle(string name, string type, string country, string plateNumber, string ownerId)
+        public bool CreateVehicle(VehicleServiceModel vehicleServiceModel)
         {
-            var user = this.db.Users.FirstOrDefault(x => x.Id == ownerId);
+            var user = this.db.Users.FirstOrDefault(x => x.Id == vehicleServiceModel.OwnerId);
+
+            var existingVehicleWithNumber = this.db.Vechiles
+                .Any(x => x.PlateNumber == vehicleServiceModel.PlateNumber);
+
+            if (existingVehicleWithNumber)
+            {
+                return false;
+            }
 
             Vechile vechile = new Vechile
             {
-                Brand = name,
-                VechileType = type,
-                Country = country,
-                PlateNumber = plateNumber,
-                OwnerId = ownerId
+                Brand = vehicleServiceModel.Brand,
+                VechileType = vehicleServiceModel.VehicleType,
+                Country = vehicleServiceModel.Country,
+                PlateNumber = vehicleServiceModel.PlateNumber,
+                OwnerId = vehicleServiceModel.OwnerId
             };
 
             user.Vechiles.Add(vechile);
-            this.db.SaveChanges();
+            int result = this.db.SaveChanges();
+
+            return result > 0;
         }
 
-        public IEnumerable<VehicleViewAllModel> GetAll(string id)
+        public IQueryable<VehicleViewAllModel> GetAll(string id)
         {
-            ;
-            var all = db.Vechiles.ToList();
-
             var result = this.db.Vechiles
                 .Where(x => x.OwnerId == id)
                 .Select(x => new VehicleViewAllModel
@@ -50,26 +58,52 @@ namespace VinetkiBG.Services
                     Country = x.Country,
                     LicencePlate = x.PlateNumber,
                     ViolationId = x.ViolationId
-                })
-                .ToList();
+                });
+               
 
             return result;
         }
 
-        public Vechile GetVechileByCountryAndLicensePlate(string country, string licensePlate)
+        public VehicleServiceModel GetVechileByCountryAndLicensePlate(CheckVehicleServiceModel checkVehicleServiceModel)
         {
-            var vehicle = this.db.Vechiles
-                .Where(x => x.Country == country && x.PlateNumber == licensePlate)
+            var vehicleFromDb = this.db.Vechiles
+                .Where(x => x.Country == checkVehicleServiceModel.Country
+                && x.PlateNumber == checkVehicleServiceModel.LicensePlate)
                 .FirstOrDefault();
+
+            if (vehicleFromDb == null)
+            {
+                return null;
+            }
+
+            var vehicle = new VehicleServiceModel
+            {
+                Brand = vehicleFromDb.Brand,
+                VehicleType = vehicleFromDb.VechileType,
+                Country = vehicleFromDb.Country,
+                PlateNumber = vehicleFromDb.PlateNumber,
+                OwnerId = vehicleFromDb.OwnerId,
+                ViolationId = vehicleFromDb.ViolationId
+            };
 
             return vehicle;
         }
 
-        public Vechile GetVechileById(string id)
+        public VehicleServiceModel GetVechileById(string id)
         {
-            var vehicle = this.db.Vechiles
-                .Where(x => x.Id == id)
-                .FirstOrDefault();
+            var vehicleFromDb = this.db.Vechiles
+                .SingleOrDefault(x => x.Id == id);
+
+                var vehicle =  new VehicleServiceModel
+                {
+                    Brand = vehicleFromDb.Brand,
+                    VehicleType = vehicleFromDb.VechileType,
+                    Country = vehicleFromDb.Country,
+                    PlateNumber = vehicleFromDb.PlateNumber,
+                    OwnerId = vehicleFromDb.OwnerId,
+                    ViolationId = vehicleFromDb.ViolationId
+                };
+                
 
             return vehicle;
         }
