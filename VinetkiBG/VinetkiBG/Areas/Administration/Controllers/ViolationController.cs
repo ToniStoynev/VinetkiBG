@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VinetkiBG.Models.BidingModels;
+using VinetkiBG.Models.ServiceModels;
 using VinetkiBG.Services;
 
 namespace VinetkiBG.Areas.Administration.Controllers
@@ -32,7 +33,9 @@ namespace VinetkiBG.Areas.Administration.Controllers
         public IActionResult Register(ViolationRegisterBindingModel model)
         {
 
-            var violation = this.violationService.RegisterViolation(model.ViolationType, model.Road, model.ViolationDate, model.PenaltyAmount, model.VehicleId);
+            var violationServiceModel = AutoMapper.Mapper.Map<ViolationServiceModel>(model);
+
+            var violation = this.violationService.RegisterViolation(violationServiceModel);
 
             return this.Redirect($"/Violation/Details/{violation.Id}");
         }

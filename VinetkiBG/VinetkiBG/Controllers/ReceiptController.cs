@@ -24,15 +24,7 @@ namespace VinetkiBG.Controllers
             var receiptFromDb = this.receiptService
                 .GetReceiptById(id);
 
-            var model = new ReceiptMyViewModel
-            {
-                Id = receiptFromDb.Id,
-                LicencePlate = receiptFromDb.LicensePlate,
-                VehicleType = receiptFromDb.VehicleType,
-                StartDate = receiptFromDb.StartDate,
-                EndDate = receiptFromDb.EndDate,
-                Price = receiptFromDb.Price
-            };
+            var model = AutoMapper.Mapper.Map<ReceiptMyViewModel>(receiptFromDb);
                
             return View(model);
         }

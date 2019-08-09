@@ -36,21 +36,13 @@ namespace VinetkiBG.Services
             return violationServiceModel;
         }
 
-        public Violation RegisterViolation(string violationType, string Road,
-             DateTime violationDate, decimal penaltyAmount, string vehicleId)
+        public Violation RegisterViolation(ViolationServiceModel violationServiceModel)
         {
-            var violation = new Violation
-            {
-                ViolationType = violationType,
-                Road = Road,
-                ViolationDate = violationDate,
-                PenaltyAmount = penaltyAmount,
-                VehicleId = vehicleId
-            };
+            var violation = AutoMapper.Mapper.Map<Violation>(violationServiceModel);
 
             this.db.Violations.Add(violation);
 
-            var vehicle = this.db.Vehicles.FirstOrDefault(x => x.Id == vehicleId);
+            var vehicle = this.db.Vehicles.FirstOrDefault(x => x.Id == violationServiceModel.VehicleId);
 
             vehicle.ViolationId = violation.Id;
 

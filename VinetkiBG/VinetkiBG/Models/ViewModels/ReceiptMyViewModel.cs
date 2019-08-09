@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VinetkiBG.Models.ServiceModels;
+using VinetkiBG.Services.Mapping;
 
 namespace VinetkiBG.Models.ViewModels
 {
-    public class ReceiptMyViewModel
+    public class ReceiptMyViewModel : IMapFrom<ReceiptServiceModel>
     {
         public string Id { get; set; }
 
-        public string LicencePlate { get; set; }
+        public string LicensePlate { get; set; }
 
         public string VehicleType { get; set; }
 

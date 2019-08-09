@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using VinetkiBG.Models.ServiceModels;
+using VinetkiBG.Services.Mapping;
 
 namespace VinetkiBG.Models.BidingModels
 {
-    public class ViolationRegisterBindingModel
+    public class ViolationRegisterBindingModel : IMapTo<ViolationServiceModel>
     {
 
         [Required]

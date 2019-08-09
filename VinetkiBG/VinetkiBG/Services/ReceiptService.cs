@@ -19,15 +19,7 @@ namespace VinetkiBG.Services
 
         public string CreateReceipt(ReceiptServiceModel receiptServiceModel)
         {
-            var receipt = new Receipt
-            {
-                LicensePlate = receiptServiceModel.LicensePlate,
-                VehicleType = receiptServiceModel.VehicleType,
-                StartDate = receiptServiceModel.StartDate,
-                EndDate = receiptServiceModel.EndDate,
-                Price = receiptServiceModel.Price,
-                VignetteId = receiptServiceModel.VignetteId
-            };
+            var receipt = AutoMapper.Mapper.Map<Receipt>(receiptServiceModel);
 
             this.db.Receipts.Add(receipt);
 
@@ -41,17 +33,8 @@ namespace VinetkiBG.Services
             var receiptFromDb = this.db.Receipts
                 .SingleOrDefault(x => x.Id == id);
 
-            var receiptServiceModel = new ReceiptServiceModel
-            {
-                Id = receiptFromDb.Id,
-                LicensePlate = receiptFromDb.LicensePlate,
-                VehicleType = receiptFromDb.VehicleType,
-                StartDate = receiptFromDb.StartDate,
-                EndDate = receiptFromDb.EndDate,
-                Price = receiptFromDb.Price,
-                VignetteId = receiptFromDb.VignetteId
-            };
-
+            var receiptServiceModel = AutoMapper.Mapper.Map<ReceiptServiceModel>(receiptFromDb);
+           
             return receiptServiceModel;
         }
     }

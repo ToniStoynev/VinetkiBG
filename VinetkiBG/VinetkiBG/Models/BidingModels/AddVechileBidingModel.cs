@@ -10,19 +10,26 @@ namespace VinetkiBG.Models.BidingModels
 {
     public class AddVechileBidingModel : IMapTo<VehicleServiceModel>
     {
+        private const string BrandErrorMessage = "Brand must be between 2 and 12 symbols";
+
+        private const string CountryErrorMessage = "Country name must be between 2 and 12 symbols";
+
+        private const string LicensePlateErrorMessage = "Plate number must be between 2 and 12 symbols";
+
+
         [Required]
-        [StringLength(maximumLength:10, ErrorMessage ="Name should be between 3 and 10 symbols", MinimumLength =3)]
+        [StringLength(maximumLength:10, ErrorMessage = BrandErrorMessage, MinimumLength =3)]
         public string Brand { get; set; }
 
         [Required]
         public string Type { get; set; }
 
         [Required]
-        [StringLength(maximumLength: 10, ErrorMessage = "Country should be between 3 and 12 symbols", MinimumLength = 3)]
+        [StringLength(maximumLength: 10, ErrorMessage = CountryErrorMessage, MinimumLength = 3)]
         public string Country { get; set; }
 
         [Required]
-        [StringLength(maximumLength: 12, ErrorMessage = "Plate number should be between 4 and 12 symbols", MinimumLength = 4)]
+        [StringLength(maximumLength: 12, ErrorMessage = LicensePlateErrorMessage, MinimumLength = 4)]
         public string PlateNumber { get; set; }
 
 

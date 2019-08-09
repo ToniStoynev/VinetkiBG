@@ -10,8 +10,7 @@ namespace VinetkiBG.Services
 {
     public interface IViolationService
     {
-        Violation RegisterViolation(string violationType, string Road,
-             DateTime violationDate, decimal penaltyAmount, string vehicleId);
+        Violation RegisterViolation(ViolationServiceModel violationServiceModel);
 
         ViolationServiceModel GetViolationById(string id);
       
