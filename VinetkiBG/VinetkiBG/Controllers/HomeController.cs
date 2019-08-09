@@ -34,24 +34,15 @@ namespace VinetkiBG.Controllers
         {
             var id = manager.GetUserId(this.User);
 
-
-
             var user = this.userService.GetUserById(id);
 
-
             int vehicleCount = userService.GetVehicleCountByUserId(id);
-                
-            var model = new UserViewModel
-            {
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email,
-                VehiclesCount = vehicleCount
-            };
+
+            var model = AutoMapper.Mapper.Map<UserViewModel>(user);
 
             return this.View(model);
         }
 
-       
+
     }
 }

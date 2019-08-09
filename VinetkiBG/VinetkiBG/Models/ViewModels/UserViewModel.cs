@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VinetkiBG.Domain;
+using VinetkiBG.Services.Mapping;
 
 namespace VinetkiBG.Models.ViewModels
 {
-    public class UserViewModel
+    public class UserViewModel : IMapFrom<VinetkiBGUser>
     {
         public string FirstName { get; set; }
 

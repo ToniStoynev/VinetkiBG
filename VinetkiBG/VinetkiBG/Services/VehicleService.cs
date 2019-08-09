@@ -23,10 +23,10 @@ namespace VinetkiBG.Services
         }
         public bool CreateVehicle(VehicleServiceModel vehicleServiceModel)
         {
-            var user = this.db.Users.FirstOrDefault(x => x.Id == vehicleServiceModel.OwnerId);
+            var user =  this.db.Users.FirstOrDefault(x => x.Id == vehicleServiceModel.OwnerId);
 
 
-            var existingVehicleWithNumber = this.db.Vehicles
+            var existingVehicleWithNumber =  this.db.Vehicles
                 .Any(x => x.PlateNumber == vehicleServiceModel.PlateNumber);
 
             if (existingVehicleWithNumber)
@@ -37,7 +37,7 @@ namespace VinetkiBG.Services
             var vehicle = AutoMapper.Mapper.Map<Vehicle>(vehicleServiceModel);
 
             user.Vehicles.Add(vehicle);
-            int result = this.db.SaveChanges();
+            int result =  this.db.SaveChanges();
 
             return result > 0;
         }
