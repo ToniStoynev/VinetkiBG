@@ -23,7 +23,7 @@ namespace VinetkiBG.Domain
         [Required]
         public string VehicleId { get; set; }
 
-        public Vechile Vehicle { get; set; }
+        public Vehicle Vehicle { get; set; }
 
   
     }

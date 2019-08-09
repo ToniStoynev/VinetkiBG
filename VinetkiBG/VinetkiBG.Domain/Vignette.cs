@@ -11,7 +11,7 @@ namespace VinetkiBG.Domain
         public string Id { get; set; }
 
         [Required]
-        public string Caterory { get; set; }
+        public string Category { get; set; }
 
         [Range(10, 150)]
         [Required]
@@ -25,10 +25,10 @@ namespace VinetkiBG.Domain
         public DateTime EndDate { get; set; }
 
         [Required]
-        public string VechileId { get; set; }
+        public string VehicleId { get; set; }
 
         [Required]
-        public Vechile Vechile { get; set; }
+        public Vehicle Vehicle { get; set; }
 
         public string RecipietId { get; set; }
         public Receipt Receipt { get; set; }

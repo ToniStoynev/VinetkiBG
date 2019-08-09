@@ -21,16 +21,9 @@ namespace VinetkiBG.Services
 
         public string BuyVignette(VignetteServiceModel vignetteServiceModel)
         {
-            var vignette = new Vignette
-            {
-                Caterory = vignetteServiceModel.Category,
-                Price = vignetteServiceModel.Price,
-                EndDate = vignetteServiceModel.EndDate,
-                StartDate = vignetteServiceModel.StartDate,
-                VechileId = vignetteServiceModel.VehicleId
-            };
+            var vignette = AutoMapper.Mapper.Map<Vignette>(vignetteServiceModel);
 
-            var vehicleFromDb = this.db.Vechiles
+            var vehicleFromDb = this.db.Vehicles
                 .SingleOrDefault(x => x.Id == vignetteServiceModel.VehicleId);
 
             this.db.Vignettes.Add(vignette);
@@ -44,7 +37,7 @@ namespace VinetkiBG.Services
 
         public VignetteServiceModel CheckVignette(CheckVehicleServiceModel checkVehicleServiceModel)
         {
-            var vehicleFromdb = this.db.Vechiles
+            var vehicleFromdb = this.db.Vehicles
             .SingleOrDefault(x => x.Country == checkVehicleServiceModel.Country
             && x.PlateNumber == checkVehicleServiceModel.LicensePlate);
 
@@ -61,36 +54,19 @@ namespace VinetkiBG.Services
                 return null;
             }
 
-            var vignetteServiceModel = new VignetteServiceModel
-            {
-                Id = vignetteFromDb.Id,
-                Category = vignetteFromDb.Caterory,
-                Price = vignetteFromDb.Price,
-                StartDate = vignetteFromDb.StartDate,
-                EndDate = vignetteFromDb.EndDate,
-                VehicleId = vignetteFromDb.VechileId
-            };
-
+            var vignetteServiceModel = AutoMapper.Mapper.Map<VignetteServiceModel>(vignetteFromDb);
+           
             return vignetteServiceModel;
         }
 
         public VignetteServiceModel GetVignetteById(string id)
         {
             var vignetteFromDb = this.db.Vignettes
-                .Include(x => x.Vechile)
+                .Include(x => x.Vehicle)
                 .Where(x => x.Id == id)
                 .FirstOrDefault();
 
-            var vignetteServiceModel = new VignetteServiceModel
-            {
-                Id = vignetteFromDb.Id,
-                Category = vignetteFromDb.Caterory,
-                StartDate = vignetteFromDb.StartDate,
-                EndDate = vignetteFromDb.EndDate,
-                Price = vignetteFromDb.Price,
-                VehicleId = vignetteFromDb.VechileId,
-                VehicleType = vignetteFromDb.Vechile.VechileType
-            };
+            var vignetteServiceModel = AutoMapper.Mapper.Map<VignetteServiceModel>(vignetteFromDb);
 
             return vignetteServiceModel;
         }

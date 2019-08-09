@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.29020.237
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VinetkiBG", "VinetkiBG\VinetkiBG.csproj", "{4A90E66D-D74D-4C53-92CF-EB1CD834640A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VinetkiBG.Data", "VinetkiBG.Data\VinetkiBG.Data.csproj", "{083B6DA3-BC13-4345-9AF6-63FDD286E5EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VinetkiBG.Data", "VinetkiBG.Data\VinetkiBG.Data.csproj", "{083B6DA3-BC13-4345-9AF6-63FDD286E5EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VinetkiBG.Domain", "VinetkiBG.Domain\VinetkiBG.Domain.csproj", "{57DB0B8C-3D65-4CB8-8EFE-2909714B51D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VinetkiBG.Domain", "VinetkiBG.Domain\VinetkiBG.Domain.csproj", "{57DB0B8C-3D65-4CB8-8EFE-2909714B51D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Mapping", "Services.Mapping\Services.Mapping.csproj", "{6AE32F45-8946-4A25-AE74-814FB0932E8D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{57DB0B8C-3D65-4CB8-8EFE-2909714B51D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57DB0B8C-3D65-4CB8-8EFE-2909714B51D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57DB0B8C-3D65-4CB8-8EFE-2909714B51D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AE32F45-8946-4A25-AE74-814FB0932E8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AE32F45-8946-4A25-AE74-814FB0932E8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AE32F45-8946-4A25-AE74-814FB0932E8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AE32F45-8946-4A25-AE74-814FB0932E8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

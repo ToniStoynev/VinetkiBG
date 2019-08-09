@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using VinetkiBG.Models.ServiceModels;
+using VinetkiBG.Services.Mapping;
 
 namespace VinetkiBG.Models.BidingModels
 {
-    public class AddVechileBidingModel
+    public class AddVechileBidingModel : IMapTo<VehicleServiceModel>
     {
         [Required]
         [StringLength(maximumLength:10, ErrorMessage ="Name should be between 3 and 10 symbols", MinimumLength =3)]
-        public string FriendlyName { get; set; }
+        public string Brand { get; set; }
 
         [Required]
         public string Type { get; set; }

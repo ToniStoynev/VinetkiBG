@@ -5,7 +5,7 @@ using System.Text;
 
 namespace VinetkiBG.Domain
 {
-    public class Vechile
+    public class Vehicle
     {
         public string Id { get; set; }
 
@@ -23,7 +23,7 @@ namespace VinetkiBG.Domain
 
         [StringLength(maximumLength: 20, ErrorMessage = "Vehicle type must be between 2 and 12 symbols", MinimumLength = 3)]
         [Required]
-        public string VechileType { get; set; }
+        public string Type { get; set; }
 
         public string OwnerId { get; set; }
         public VinetkiBGUser Owner { get; set; }

@@ -76,16 +76,19 @@ namespace VinetkiBG.Areas.Administration.Controllers
                 status = "Expired";
             }
 
-            var model = new VignetteDetailsViewModel
-            {
-                Id = vignetteFromDb.Id,
-                VehicleType = vignetteFromDb.VehicleType,
-                StartDate = vignetteFromDb.StartDate,
-                EndDate = vignetteFromDb.EndDate,
-                Price = vignetteFromDb.Price,
-                Status = status,
-                VehicleId = vignetteFromDb.VehicleId
-            };
+            //var model = new VignetteDetailsViewModel
+            //{
+            //    Id = vignetteFromDb.Id,
+            //    VehicleType = vignetteFromDb.VehicleType,
+            //    StartDate = vignetteFromDb.StartDate,
+            //    EndDate = vignetteFromDb.EndDate,
+            //    Price = vignetteFromDb.Price,
+            //    Status = status,
+            //    VehicleId = vignetteFromDb.VehicleId
+            //};
+
+            var model = AutoMapper.Mapper.Map<VignetteDetailsViewModel>(vignetteFromDb);
+            model.Status = status;
 
             return this.View(model);
         }

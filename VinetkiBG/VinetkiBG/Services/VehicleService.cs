@@ -3,11 +3,13 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using VinetkiBG.Data;
 using VinetkiBG.Domain;
 using VinetkiBG.Models.ServiceModels;
 using VinetkiBG.Models.ViewModels;
+using VinetkiBG.Services.Mapping;
 
 namespace VinetkiBG.Services
 {
@@ -23,7 +25,8 @@ namespace VinetkiBG.Services
         {
             var user = this.db.Users.FirstOrDefault(x => x.Id == vehicleServiceModel.OwnerId);
 
-            var existingVehicleWithNumber = this.db.Vechiles
+
+            var existingVehicleWithNumber = this.db.Vehicles
                 .Any(x => x.PlateNumber == vehicleServiceModel.PlateNumber);
 
             if (existingVehicleWithNumber)
@@ -31,16 +34,9 @@ namespace VinetkiBG.Services
                 return false;
             }
 
-            Vechile vechile = new Vechile
-            {
-                Brand = vehicleServiceModel.Brand,
-                VechileType = vehicleServiceModel.VehicleType,
-                Country = vehicleServiceModel.Country,
-                PlateNumber = vehicleServiceModel.PlateNumber,
-                OwnerId = vehicleServiceModel.OwnerId
-            };
+            var vehicle = AutoMapper.Mapper.Map<Vehicle>(vehicleServiceModel);
 
-            user.Vechiles.Add(vechile);
+            user.Vehicles.Add(vehicle);
             int result = this.db.SaveChanges();
 
             return result > 0;
@@ -48,25 +44,16 @@ namespace VinetkiBG.Services
 
         public IQueryable<VehicleViewAllModel> GetAll(string id)
         {
-            var result = this.db.Vechiles
+            var result = this.db.Vehicles
                 .Where(x => x.OwnerId == id)
-                .Select(x => new VehicleViewAllModel
-                {
-                    Id = x.Id,
-                    Brand = x.Brand,
-                    VehicleType = x.VechileType,
-                    Country = x.Country,
-                    LicencePlate = x.PlateNumber,
-                    ViolationId = x.ViolationId
-                });
-               
-
+                .To<VehicleViewAllModel>();
+     
             return result;
         }
 
         public VehicleServiceModel GetVechileByCountryAndLicensePlate(CheckVehicleServiceModel checkVehicleServiceModel)
         {
-            var vehicleFromDb = this.db.Vechiles
+            var vehicleFromDb = this.db.Vehicles
                 .Where(x => x.Country == checkVehicleServiceModel.Country
                 && x.PlateNumber == checkVehicleServiceModel.LicensePlate)
                 .FirstOrDefault();
@@ -76,37 +63,19 @@ namespace VinetkiBG.Services
                 return null;
             }
 
-            var vehicle = new VehicleServiceModel
-            {
-                Brand = vehicleFromDb.Brand,
-                VehicleType = vehicleFromDb.VechileType,
-                Country = vehicleFromDb.Country,
-                PlateNumber = vehicleFromDb.PlateNumber,
-                OwnerId = vehicleFromDb.OwnerId,
-                ViolationId = vehicleFromDb.ViolationId
-            };
+            var vehicle = AutoMapper.Mapper.Map<VehicleServiceModel>(vehicleFromDb);
 
             return vehicle;
         }
 
         public VehicleServiceModel GetVechileById(string id)
         {
-            var vehicleFromDb = this.db.Vechiles
+            var vehicleFromDb = this.db.Vehicles
                 .SingleOrDefault(x => x.Id == id);
 
-                var vehicle =  new VehicleServiceModel
-                {
-                    Brand = vehicleFromDb.Brand,
-                    VehicleType = vehicleFromDb.VechileType,
-                    Country = vehicleFromDb.Country,
-                    PlateNumber = vehicleFromDb.PlateNumber,
-                    OwnerId = vehicleFromDb.OwnerId,
-                    ViolationId = vehicleFromDb.ViolationId
-                };
-                
+            var vehicle = AutoMapper.Mapper.Map<VehicleServiceModel>(vehicleFromDb);
 
             return vehicle;
         }
-
     }
 }

@@ -20,7 +20,7 @@ namespace VinetkiBG.Services
         public VinetkiBGUser GetUserById(string id)
         {
             var user =  this.db.Users
-                .Include(x => x.Vechiles)
+                .Include(x => x.Vehicles)
                 .FirstOrDefault(x => x.Id == id);
 
             return user;
@@ -29,7 +29,7 @@ namespace VinetkiBG.Services
         public int GetVehicleCountByUserId(string id)
         {
             var result = db.Users.Where(x => x.Id == id)
-                .Select(x => x.Vechiles.Count())
+                .Select(x => x.Vehicles.Count())
                 .FirstOrDefault();
 
             return result;

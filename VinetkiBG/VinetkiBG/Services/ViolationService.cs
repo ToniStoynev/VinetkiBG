@@ -50,7 +50,7 @@ namespace VinetkiBG.Services
 
             this.db.Violations.Add(violation);
 
-            var vehicle = this.db.Vechiles.FirstOrDefault(x => x.Id == vehicleId);
+            var vehicle = this.db.Vehicles.FirstOrDefault(x => x.Id == vehicleId);
 
             vehicle.ViolationId = violation.Id;
 

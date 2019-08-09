@@ -12,7 +12,7 @@ namespace VinetkiBG.Data
     {
         public DbSet<VinetkiBGUser> VinetkiBGUsers { get; set; }
 
-        public DbSet<Vechile> Vechiles { get; set; }
+        public DbSet<Vehicle> Vehicles { get; set; }
 
         public DbSet<Vignette> Vignettes { get; set; }
 
@@ -28,18 +28,18 @@ namespace VinetkiBG.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<VinetkiBGUser>()
-                .HasMany(x => x.Vechiles)
+                .HasMany(x => x.Vehicles)
                 .WithOne(x => x.Owner);
 
-            builder.Entity<Vechile>()
+            builder.Entity<Vehicle>()
                 .HasOne(o => o.Owner);
 
-            builder.Entity<Vechile>()
+            builder.Entity<Vehicle>()
                 .HasOne(v => v.Vignette)
-                .WithOne(v => v.Vechile)
-                .HasForeignKey<Vignette>(f => f.VechileId);
+                .WithOne(v => v.Vehicle)
+                .HasForeignKey<Vignette>(f => f.VehicleId);
 
-            builder.Entity<Vechile>()
+            builder.Entity<Vehicle>()
              .HasOne(v => v.Violation)
              .WithOne(v => v.Vehicle)
              .HasForeignKey<Violation>(f => f.VehicleId);

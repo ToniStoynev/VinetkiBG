@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -38,16 +39,10 @@ namespace VinetkiBG.Controllers
                 return this.Redirect("/Vehicles/Add");
             }
 
-            var currentUserId = manager.GetUserId(this.User);
+            string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            VehicleServiceModel vehicleServiceModel = new VehicleServiceModel
-            {
-                Brand = model.FriendlyName,
-                Country = model.Country,
-                PlateNumber = model.PlateNumber,
-                VehicleType = model.Type,
-                OwnerId = currentUserId
-            };
+            var vehicleServiceModel = AutoMapper.Mapper.Map<VehicleServiceModel>(model);
+            vehicleServiceModel.OwnerId = userId;
 
             var isRegisterdNewVehicle = this.vehicleService.CreateVehicle(vehicleServiceModel);
 
@@ -62,10 +57,10 @@ namespace VinetkiBG.Controllers
         [Authorize]
         public IActionResult All()
         {
-            var id = manager.GetUserId(this.User);
+            string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             var viewModel = this.vehicleService
-                .GetAll(id)
+                .GetAll(userId)
                 .ToList();
 
             return this.View(viewModel);

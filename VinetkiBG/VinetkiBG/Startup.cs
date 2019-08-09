@@ -15,6 +15,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using VinetkiBG.Domain;
 using VinetkiBG.Services;
+using VinetkiBG.Services.Mapping;
+using VinetkiBG.Models.ServiceModels;
+using VinetkiBG.Models.ViewModels;
+using VinetkiBG.Models.BidingModels;
+using System.Reflection;
 
 namespace VinetkiBG
 {
@@ -72,6 +77,11 @@ namespace VinetkiBG
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            AutoMapperConfig.RegisterMappings(
+               typeof(AddVechileBidingModel).GetTypeInfo().Assembly,
+               typeof(VehicleViewAllModel).GetTypeInfo().Assembly,
+               typeof(VehicleServiceModel).GetTypeInfo().Assembly);
+
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
                 using (var context = serviceScope.ServiceProvider.GetRequiredService<VinetkiBGDbContext>())

@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VinetkiBG.Domain;
+using VinetkiBG.Services.Mapping;
 
 namespace VinetkiBG.Models.ServiceModels
 {
-    public class VignetteServiceModel
+    public class VignetteServiceModel : IMapFrom<Vignette>, IMapTo<Vignette>
     {
         public string Id { get; set; }
         public string Category { get; set; }

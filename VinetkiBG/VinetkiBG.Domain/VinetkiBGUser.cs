@@ -9,13 +9,13 @@ namespace VinetkiBG.Domain
     {
         public VinetkiBGUser()
         {
-            this.Vechiles = new HashSet<Vechile>();
+            this.Vehicles = new HashSet<Vehicle>();
         }
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
 
-        public ICollection<Vechile> Vechiles { get; set; }
+        public ICollection<Vehicle> Vehicles { get; set; }
 
     }
 }

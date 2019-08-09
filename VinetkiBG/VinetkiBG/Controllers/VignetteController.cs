@@ -47,15 +47,14 @@ namespace VinetkiBG.Controllers
 
             var vignetteServiceModel = new VignetteServiceModel
             {
-                Category = input.VignetteType,
+                Category = input.Category,
                 StartDate = input.StartDate,
                 VehicleId = input.VehicleId
             };
 
             vignetteServiceModel.EndDate = input.StartDate;
-            decimal price = 0.0M;
 
-            switch (input.VignetteType)
+            switch (input.Category)
             {
                 case "Weekend":
                     vignetteServiceModel.EndDate = input.StartDate.AddDays(3);
@@ -84,7 +83,7 @@ namespace VinetkiBG.Controllers
             var receipt = new ReceiptServiceModel
             {
                 LicensePlate = currentVehicle.PlateNumber,
-                VehicleType = currentVehicle.VehicleType,
+                VehicleType = currentVehicle.Type,
                 StartDate = input.StartDate,
                 EndDate = vignetteServiceModel.EndDate,
                 Price = vignetteServiceModel.Price,
