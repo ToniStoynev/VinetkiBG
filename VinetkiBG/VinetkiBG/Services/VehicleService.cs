@@ -21,6 +21,7 @@ namespace VinetkiBG.Services
         {
             this.db = db;
         }
+
         public bool CreateVehicle(VehicleServiceModel vehicleServiceModel)
         {
             var user =  this.db.Users.FirstOrDefault(x => x.Id == vehicleServiceModel.OwnerId);
