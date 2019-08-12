@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Services.Mapping\Services.Mapping.csproj" />
     <ProjectReference Include="..\VinetkiBG\VinetkiBG.csproj" />
   </ItemGroup>
 
