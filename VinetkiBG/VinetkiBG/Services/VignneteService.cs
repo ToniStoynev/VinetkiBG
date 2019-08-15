@@ -30,6 +30,8 @@ namespace VinetkiBG.Services
 
             vehicleFromDb.VignetteId = vignette.Id;
 
+            this.db.Update(vehicleFromDb);
+
             this.db.SaveChanges();
 
             return vignette.Id;
