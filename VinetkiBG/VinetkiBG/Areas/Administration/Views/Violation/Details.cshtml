@@ -1,0 +1,43 @@
+﻿@model VinetkiBG.Models.ViewModels.ViolationDetailsViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1 class="text-center font-weight-bold mx-5">Violation Details</h1>
+<div class="d-flex justify-content-center w-75 mx-auto mt-5">
+    <table class="table table-responsive">
+        <thead class="bg-primary text-light font-weight-bold">
+            <tr class="text-center">
+                <th scope="col">Violation Id</th>
+                <th scope="col">Violation Type</th>
+                <th scope="col">Violation Road</th>
+                <th scope="col">Date of Violation</th>
+                <th scope="col">Amount of violation</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody class="table-bordered table-active table-light  font-weight-bold">
+            <tr>
+                <td>@Model.Id</td>
+                <td>@Model.ViolationType</td>
+                <td>@Model.Road</td>
+                <td>@Model.ViolationDate</td>
+                <td>@Model.PenaltyAmount</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+@if (this.User.IsInRole("User"))
+{
+    <div class="d-flex justify-content-center mt-5">
+        <form action="/Violation/Details/" method="post">
+            <input type="hidden" name="violationId" value=@Model.Id />
+            <input type="submit" class="btn btn-primary font-weight-bold" name="name" value="Pay Penalty" />
+        </form>
+    </div>
+}
+
+

@@ -10,6 +10,7 @@ namespace VinetkiBG.Models.ServiceModels
 {
     public class VehicleServiceModel : IMapFrom<Vehicle>, IMapFrom<AddVechileBidingModel>, IMapTo<Vehicle>
     {
+        public string Id { get; set; }
         public string Brand { get; set; }
 
         public string Type { get; set; }

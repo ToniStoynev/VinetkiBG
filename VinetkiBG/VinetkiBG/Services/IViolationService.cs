@@ -10,7 +10,7 @@ namespace VinetkiBG.Services
 {
     public interface IViolationService
     {
-        Violation RegisterViolation(ViolationServiceModel violationServiceModel);
+        string RegisterViolation(ViolationServiceModel violationServiceModel);
 
         ViolationServiceModel GetViolationById(string id);
       

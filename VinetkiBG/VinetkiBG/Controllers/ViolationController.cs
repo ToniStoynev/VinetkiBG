@@ -29,23 +29,15 @@ namespace VinetkiBG.Controllers
         {
             var violationFromDb = this.violationService.GetViolationById(id);
 
-            var model = new ViolationDetailsViewModel
-            {
-                Id = violationFromDb.Id,
-                ViolationType = violationFromDb.ViolationType,
-                Road = violationFromDb.Road,
-                PenaltyAmount = violationFromDb.PenaltyAmount,
-                ViolationDate = violationFromDb.ViolationDate,
-                VehicleId = violationFromDb.VehicleId
-            };
+            var model = AutoMapper.Mapper.Map<ViolationDetailsViewModel>(violationFromDb);
 
             return this.View(model);
         }
 
-        [Authorize]
-        public IActionResult NotFound()
-        {
-            return this.View(); 
-        }
+        //[Authorize]
+        //public IActionResult NotFound()
+        //{
+        //    return this.View(); 
+        //}
     }
 }

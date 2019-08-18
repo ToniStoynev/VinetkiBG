@@ -35,9 +35,9 @@ namespace VinetkiBG.Areas.Administration.Controllers
 
             var violationServiceModel = AutoMapper.Mapper.Map<ViolationServiceModel>(model);
 
-            var violation = this.violationService.RegisterViolation(violationServiceModel);
+            var violationId = this.violationService.RegisterViolation(violationServiceModel);
 
-            return this.Redirect($"/Violation/Details/{violation.Id}");
+            return this.Redirect($"/Violation/Details/{violationId}");
         }
 
         public IActionResult NotFoundVehicle()

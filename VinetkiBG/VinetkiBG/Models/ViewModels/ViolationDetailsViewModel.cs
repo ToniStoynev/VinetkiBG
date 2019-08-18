@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VinetkiBG.Domain;
+using VinetkiBG.Services.Mapping;
 
 namespace VinetkiBG.Models.ViewModels
 {
-    public class ViolationDetailsViewModel
+    public class ViolationDetailsViewModel : IMapFrom<Violation>
     {
         public string Id { get; set; }
 

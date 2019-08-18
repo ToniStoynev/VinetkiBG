@@ -48,12 +48,12 @@ namespace VinetkiBG.Areas.Administration.Controllers
 
             if (vignetteFromDb == null && vechileFromDb.ViolationId == null)
             {
-                return this.Redirect($"/Administration/Violation/Register/{vechileFromDb.ViolationId}");
+                return this.Redirect($"/Administration/Violation/Register/{vechileFromDb.Id}");
             }
 
             if (vignetteFromDb == null && vechileFromDb.ViolationId != null)
             {
-                return this.Redirect($"/Violation/Details/{vechileFromDb.ViolationId}");
+                return this.Redirect($"/Administration/Violation/Details/{vechileFromDb.ViolationId}");
             }
 
             return this.Redirect($"/Administration/Vignette/Details/{vignetteFromDb.Id}");
