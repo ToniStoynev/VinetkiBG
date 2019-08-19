@@ -1,0 +1,27 @@
+﻿@model  VinetkiBG.Models.ViewModels.CreditCardDetailsViewModel
+@{
+    ViewData["Title"] = "PayPenalty";
+}
+
+    <div class="container justify-content-center">
+        <h3 class="text-center">My Cart</h3>
+        <table class="table table-hover table-striped text-center">
+            <thead>
+                <tr class="row">
+                    <th scope="col" class="col-lg-4">Bank Name</th>
+                    <th scope="col" class="col-lg-4">IBAN</th>
+                    <th scope="col" class="col-lg-4">Total Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="row">
+                    <td class="col-lg-4">@Model.BankName</td>
+                    <td class="col-lg-4">@Model.IBAN</td>
+                    <td class="col-lg-4">@Model.TotalAmount</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="button-holder text-center">
+            <a href="/Carts/Buy" class="btn btn-outline-primary font-weight-bold">Buy</a>
+        </div>
+    </div>

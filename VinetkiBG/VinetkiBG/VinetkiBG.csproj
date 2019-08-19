@@ -21,11 +21,4 @@
     <ProjectReference Include="..\VinetkiBG.Domain\VinetkiBG.Domain.csproj" />
   </ItemGroup>
 
-
-  <ItemGroup>
-    <Content Update="Views\CreditCard\All.cshtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
 </Project>

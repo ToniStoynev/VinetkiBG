@@ -1,4 +1,4 @@
-﻿
+﻿@model  List<VinetkiBG.Models.ViewModels.CreditCardAllViewModel>
 @{
     ViewData["Title"] = "All";
 }
@@ -11,24 +11,26 @@
     <table class="table table-hover">
         <thead>
             <tr class="row">
-                <th scope="col" class="col-lg-5">Name</th>
-                <th scope="col" class="col-lg-5">Price</th>
-                <th scope="col" class="col-lg-2">Add to Cart</th>
+                <th scope="col" class="col-lg-3">Bank Name</th>
+                <th scope="col" class="col-lg-3">IBAN</th>
+                <th scope="col" class="col-lg-3">Total Amount</th>
+                <th scope="col" class="col-lg-3">Choose card</th>
             </tr>
         </thead>
         <tbody>
-            @*@foreach (var problem in Model)
-            {*@
-                <tr class="row">
-                    <td class="col-lg-5">problem.Name</td>
-                    <td class="col-lg-5">problem.Price</td>
-                    <td class="col-lg-2">
-                        <div class="button-holder">
-                            <a href="/Carts/AddProduct?productId=problem.Id" class="btn btn-outline-primary">Add to Cart</a>
-                        </div>
-                    </td>
-                </tr>
-            
+            @foreach (var card in Model)
+            {
+            <tr class="row">
+                <td class="col-lg-3">@card.BankName</td>
+                <td class="col-lg-3">@card.IBAN</td>
+                <td class="col-lg-3 font-weight-bold">@card.TotalAmount</td>
+                <td class="col-lg-3">
+                    <div class="button-holder">
+                        <a href="/CreditCard/PayPenalty?id=@card.Id" class="btn btn-outline-primary">Choose Card</a>
+                    </div>
+                </td>
+            </tr>
+            }
         </tbody>
     </table>
 </div>

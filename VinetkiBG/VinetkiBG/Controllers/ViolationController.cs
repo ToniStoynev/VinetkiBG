@@ -29,6 +29,8 @@ namespace VinetkiBG.Controllers
         [HttpGet]
         public IActionResult Details(string id)
         {
+            ViewData["ViolationID"] = id;
+
             var violationFromDb = this.violationService.GetViolationById(id);
 
             var model = AutoMapper.Mapper.Map<ViolationDetailsViewModel>(violationFromDb);
