@@ -20,6 +20,8 @@ namespace VinetkiBG.Data
 
         public DbSet<Violation> Violations { get; set; }
 
+        public DbSet<CredtiCard> CreditCards { get; set; }
+
         public VinetkiBGDbContext(DbContextOptions<VinetkiBGDbContext> options) : base(options)
         {
 
@@ -30,6 +32,10 @@ namespace VinetkiBG.Data
             builder.Entity<VinetkiBGUser>()
                 .HasMany(x => x.Vehicles)
                 .WithOne(x => x.Owner);
+
+            builder.Entity<VinetkiBGUser>()
+               .HasMany(x => x.CredtiCards)
+               .WithOne(x => x.CardHolder);
 
             builder.Entity<Vehicle>()
                 .HasOne(o => o.Owner);
@@ -55,6 +61,11 @@ namespace VinetkiBG.Data
             builder.Entity<Violation>()
                 .HasOne(v => v.Vehicle)
                 .WithOne(v => v.Violation);
+
+            builder.Entity<CredtiCard>()
+                .HasOne(x => x.CardHolder)
+                .WithMany(x => x.CredtiCards)
+                .HasForeignKey(f => f.CardHolderId);
 
             base.OnModelCreating(builder);
         }

@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewData["Title"] = "All";
+}
+<h1 class="text-center mt-4 text-primary">Choose Credit Card</h1>
+<h6 class="text-center mt-4">Register if you don't have credit card ?</h6>
+<div class="button-holder text-center">
+    <a href="/CreditCard/Register" class="btn btn-outline-primary font-weight-bold">Register Credit Card</a>
+</div>
+<div class="container mt-5">
+    <table class="table table-hover">
+        <thead>
+            <tr class="row">
+                <th scope="col" class="col-lg-5">Name</th>
+                <th scope="col" class="col-lg-5">Price</th>
+                <th scope="col" class="col-lg-2">Add to Cart</th>
+            </tr>
+        </thead>
+        <tbody>
+            @*@foreach (var problem in Model)
+            {*@
+                <tr class="row">
+                    <td class="col-lg-5">problem.Name</td>
+                    <td class="col-lg-5">problem.Price</td>
+                    <td class="col-lg-2">
+                        <div class="button-holder">
+                            <a href="/Carts/AddProduct?productId=problem.Id" class="btn btn-outline-primary">Add to Cart</a>
+                        </div>
+                    </td>
+                </tr>
+            
+        </tbody>
+    </table>
+</div>

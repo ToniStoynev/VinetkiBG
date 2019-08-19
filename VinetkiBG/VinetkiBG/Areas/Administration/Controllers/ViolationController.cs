@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VinetkiBG.Models.BidingModels;
 using VinetkiBG.Models.ServiceModels;
+using VinetkiBG.Models.ViewModels;
 using VinetkiBG.Services;
 
 namespace VinetkiBG.Areas.Administration.Controllers
@@ -38,6 +39,15 @@ namespace VinetkiBG.Areas.Administration.Controllers
             var violationId = this.violationService.RegisterViolation(violationServiceModel);
 
             return this.Redirect($"/Violation/Details/{violationId}");
+        }
+
+        public IActionResult Details(string id)
+        {
+            var violation = this.violationService.GetViolationById(id);
+
+            var model = AutoMapper.Mapper.Map<ViolationDetailsViewModel>(violation);
+
+            return this.View(model);
         }
 
         public IActionResult NotFoundVehicle()

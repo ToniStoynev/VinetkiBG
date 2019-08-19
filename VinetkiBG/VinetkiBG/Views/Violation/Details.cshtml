@@ -23,18 +23,16 @@
                 <td>@Model.Road</td>
                 <td>@Model.ViolationDate</td>
                 <td>@Model.PenaltyAmount</td>
+                <td>@Model.PenaltyAmount</td>
             </tr>
         </tbody>
     </table>
 </div>
 @if (this.User.IsInRole("User"))
 {
-    <div class="d-flex justify-content-center mt-5">
-        <form action="/Violation/Details/" method="post">
-            <input  type="hidden" name="violationId" value=@Model.Id />
-            <input type="submit" class="btn btn-primary font-weight-bold" name="name" value="Pay Penalty" />
-        </form>
-    </div>
+<div class="d-flex justify-content-center mt-5">
+        <a href="/CreditCard/All" class="btn btn-primary font-weight-bold">Pay Penalty</a>
+</div>
 }
 
 

@@ -24,6 +24,8 @@ namespace VinetkiBG.Controllers
             this.vehicleService = vehicleService;
             this.userService = userService;
         }
+
+        [Authorize]
         [HttpGet]
         public IActionResult Details(string id)
         {
@@ -34,10 +36,18 @@ namespace VinetkiBG.Controllers
             return this.View(model);
         }
 
-        //[Authorize]
-        //public IActionResult NotFound()
-        //{
-        //    return this.View(); 
-        //}
+        [Authorize]
+        public IActionResult PayPenalty(string id)
+        {
+            return this.View();
+        }
+
+        [Authorize]
+        public IActionResult NotFound()
+        {
+            return this.View();
+        }
+
+
     }
 }
