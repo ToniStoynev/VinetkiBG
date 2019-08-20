@@ -26,7 +26,14 @@
                     <td class="col-lg-2 suls-text-color">@vehicle.Country</td>
                     <td class="col-lg-2 suls-text-color">@vehicle.PlateNumber</td>
                     <td class="col-lg-2 suls-text-color">
-                      <a href="/Vignette/Purchase?id=@vehicle.Id" class="btn btn-outline-primary">Purchase vignnete</a> 
+                        @if (vehicle.VignetteId == null)
+                        {
+                            <a href="/Vignette/Purchase?id=@vehicle.Id" class="btn btn-outline-primary">Purchase vignnete</a>
+                        }
+                        else
+                        {
+                            <a href="/Vignette/Details?id=@vehicle.VignetteId" class="btn btn-outline-primary">Purchase vignnete</a>
+                        }
                     </td>
                     <td class="col-lg-2 suls-text-color">
                         @if (vehicle.ViolationId == null)

@@ -93,5 +93,23 @@ namespace VinetkiBG.Controllers
             var receiptInDb = this.receiptService.CreateReceipt(receipt);
             return this.Redirect($"/Receipt/My/{receiptInDb}");
         }
+
+        [HttpGet]
+        public IActionResult Details(string id)
+        {
+            var vignetteFromDb = this.vignneteService.GetVignetteById(id);
+
+            string status = "Active";
+
+            if (vignetteFromDb.EndDate < DateTime.UtcNow)
+            {
+                status = "Expired";
+            }
+
+            var model = AutoMapper.Mapper.Map<VignetteDetailsViewModel>(vignetteFromDb);
+            model.Status = status;
+
+            return this.View(model);
+        }
     }
 }

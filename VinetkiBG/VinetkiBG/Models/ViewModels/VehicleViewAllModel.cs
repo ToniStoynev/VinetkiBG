@@ -21,5 +21,7 @@ namespace VinetkiBG.Models.ViewModels
         public string PlateNumber { get; set; }
 
         public string ViolationId { get; set; }
+
+        public string VignetteId { get; set; }
     }
 }
