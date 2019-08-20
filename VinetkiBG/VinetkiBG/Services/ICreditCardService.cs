@@ -14,5 +14,7 @@ namespace VinetkiBG.Services
         IQueryable<CreditCardAllViewModel> GetAllCards(string id);
 
         CreditCardDetailsViewModel GetCreditCardById(string id);
+
+        bool PayPenalty(string id);
     }
 }

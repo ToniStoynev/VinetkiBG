@@ -47,5 +47,17 @@ namespace VinetkiBG.Services
 
             return result > 0;
         }
+
+        public bool PayPenalty(string id)
+        {
+            var vehicleFromDb = this.context.Vehicles
+                .SingleOrDefault(x => x.Id == id);
+            vehicleFromDb.ViolationId = null;
+
+            context.Update(vehicleFromDb);
+            int result = this.context.SaveChanges();
+
+            return result > 0;
+        }
     }
 }
