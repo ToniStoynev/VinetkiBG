@@ -19,6 +19,23 @@ namespace VinetkiBG.Services
             this.context = context;
         }
 
+        //TODO: Test this method
+        public bool DeleteViolation(string id)
+        {
+           var vehicleFromDb = this.context.Vehicles
+                .FirstOrDefault(x => x.ViolationId == id);
+
+            var violationFromDb = this.context.Violations
+                .SingleOrDefault(x => x.Id == id);
+            vehicleFromDb.ViolationId = null;
+
+            this.context.Update(vehicleFromDb);
+            this.context.Violations.Remove(violationFromDb);
+
+            int result = this.context.SaveChanges();
+            return result > 0;
+        }
+
         public IQueryable<CreditCardAllViewModel> GetAllCards(string id)
         {
             var creditCards = this.context.CreditCards
@@ -28,6 +45,7 @@ namespace VinetkiBG.Services
             return creditCards;
         }
 
+        //TODO: Test this method
         public CreditCardDetailsViewModel GetCreditCardById(string id)
         {
             var creditCardFromDb = this.context.CreditCards
@@ -36,6 +54,19 @@ namespace VinetkiBG.Services
             var creditCard = AutoMapper.Mapper.Map<CreditCardDetailsViewModel>(creditCardFromDb);
 
             return creditCard;
+        }
+
+        //TODO: Test this method
+        public bool PayPenalty(string cardId, decimal violationAmount)
+        {
+            var creditCardFromDb = this.context.CreditCards
+                .SingleOrDefault(x => x.Id == cardId);
+
+            creditCardFromDb.TotalAmount -= violationAmount;
+            this.context.Update(creditCardFromDb);
+
+            int result = this.context.SaveChanges();
+            return result > 0;
         }
 
         public bool Register(CreditCardServiceModel creditCardServiceModel)
@@ -48,16 +79,6 @@ namespace VinetkiBG.Services
             return result > 0;
         }
 
-        public bool PayPenalty(string id)
-        {
-            var vehicleFromDb = this.context.Vehicles
-                .SingleOrDefault(x => x.Id == id);
-            vehicleFromDb.ViolationId = null;
-
-            context.Update(vehicleFromDb);
-            int result = this.context.SaveChanges();
-
-            return result > 0;
-        }
+       
     }
 }

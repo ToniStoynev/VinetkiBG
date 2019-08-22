@@ -15,6 +15,8 @@ namespace VinetkiBG.Services
 
         CreditCardDetailsViewModel GetCreditCardById(string id);
 
-        bool PayPenalty(string id);
+        bool PayPenalty(string cardId, decimal violationAmount);
+
+        bool DeleteViolation(string id);
     }
 }

@@ -21,9 +21,12 @@ namespace VinetkiBG.Controllers
         }
 
         [Authorize]
-        public IActionResult All()
+        public IActionResult All(string id, decimal amount)
         {
             string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            ViewData["violationId"] = id;
+            ViewData["violationAmmount"] = amount;
 
             var model = this.creditCardService
                 .GetAllCards(userId)
@@ -56,10 +59,14 @@ namespace VinetkiBG.Controllers
         }
 
         [Authorize]
-        public IActionResult PayPenalty(string id)
+        public IActionResult PayPenalty(string id, string vid, decimal vam)
         {
-            var model = this.creditCardService.GetCreditCardById(id);
+            ViewData["violationId"] = vid;
+            ViewData["violationAmmount"] = vam;
+            var payPenaltyResult = creditCardService.PayPenalty(id, vam);
 
+            var deleteViolation = creditCardService.DeleteViolation(vid);
+            var model = this.creditCardService.GetCreditCardById(id);
             return this.View(model);
         }
     }

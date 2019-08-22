@@ -9,6 +9,7 @@ namespace VinetkiBG.Models.ViewModels
 {
     public class CreditCardDetailsViewModel : IMapFrom<CredtiCard>
     {
+        public string Id { get; set; }
         public string BankName { get; set; }
 
         public string IBAN { get; set; }
