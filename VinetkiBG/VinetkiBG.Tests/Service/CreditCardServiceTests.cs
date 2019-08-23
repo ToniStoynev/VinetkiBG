@@ -263,6 +263,7 @@ namespace VinetkiBG.Tests.Service
         public void PayPenalty_WithCorrectData_ShouldWorkProperly()
         {
             string errorMessage = "PayPenalty() doesn't work properly";
+            decimal testAmount = 100;
 
             var context = VinetkiBGDbContextInMemoryFactory.InitializeContext();
             SeedData(context);
@@ -272,9 +273,9 @@ namespace VinetkiBG.Tests.Service
 
             decimal startAmount = context.CreditCards.First().TotalAmount; 
 
-            var expectedResult = this.creditCardService.PayPenalty(testId, 100);
+            var expectedResult = this.creditCardService.PayPenalty(testId, testAmount);
 
-            decimal expectedAmountAfterPaidPenalty = 1100;
+            decimal expectedAmountAfterPaidPenalty = GetDummyCreditCards()[0].TotalAmount - testAmount;
             decimal actualAmountAfterPaidPenalty = context.CreditCards.First().TotalAmount;
 
             Assert.Equal(expectedAmountAfterPaidPenalty, actualAmountAfterPaidPenalty);
