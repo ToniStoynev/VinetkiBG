@@ -70,10 +70,54 @@ namespace VinetkiBG.Tests.Service
             };
         }
 
+        private List<Vehicle> GetDummyVehicles()
+        {
+            return new List<Vehicle>()
+            {
+                new Vehicle
+                {
+                    Id = "abcd",
+                    Brand = "BMW",
+                    Country = "Bulgaria",
+                    PlateNumber = "KH4934BA",
+                    OwnerId = "abcd",
+                    Type = "LightVehicle"
+                },
+                new Vehicle
+                {
+                    Id = "dfgh",
+                    Brand = "Mercedes",
+                    Country = "Bulgaria",
+                    PlateNumber = "KH9735BP",
+                    OwnerId = "abcd",
+                    Type = "LightVehicle",
+                    ViolationId = "afsdfsd"
+                }
+            };
+        }
+
+        private List<Violation> GetDummyViolations()
+        {
+            return new List<Violation>()
+            {
+                new Violation
+                {
+                    Id = "afsdfsd",
+                    ViolationType = "Fine",
+                    Road = "E89",
+                    PenaltyAmount = 100,
+                    ViolationDate = DateTime.UtcNow,
+                    VehicleId = "dfgh"
+                }
+            };
+        }
+
         private void SeedData(VinetkiBGDbContext context)
         {
             context.AddRange(GetDummyUsers());
             context.AddRange(GetDummyCreditCards());
+            context.AddRange(GetDummyVehicles());
+            context.AddRange(GetDummyViolations());
             context.SaveChanges();
         }
         public CreditCardServiceTests()
@@ -198,6 +242,43 @@ namespace VinetkiBG.Tests.Service
 
             var actualResult = this.creditCardService.GetAllCards(testId).ToList();
             Assert.True(actualResult.Count == 0, "GetAllCards doesn't work proplerly");
+        }
+
+        [Fact]
+        public void DeleteViolation_WithExistingId_ShouldWorkProperly()
+        {
+            string errorMessage = "DeleteViolation() method doesn't work properly";
+
+            var context = VinetkiBGDbContextInMemoryFactory.InitializeContext();
+            SeedData(context);
+            this.creditCardService = new CreditCardService(context);
+
+            string testId = GetDummyViolations()[0].Id;
+
+            var expectedResult = this.creditCardService.DeleteViolation(testId);
+            Assert.True(expectedResult == true, errorMessage);
+        }
+
+        [Fact]
+        public void PayPenalty_WithCorrectData_ShouldWorkProperly()
+        {
+            string errorMessage = "PayPenalty() doesn't work properly";
+
+            var context = VinetkiBGDbContextInMemoryFactory.InitializeContext();
+            SeedData(context);
+            this.creditCardService = new CreditCardService(context);
+
+            string testId = context.CreditCards.First().Id;
+
+            decimal startAmount = context.CreditCards.First().TotalAmount; 
+
+            var expectedResult = this.creditCardService.PayPenalty(testId, 100);
+
+            decimal expectedAmountAfterPaidPenalty = 1100;
+            decimal actualAmountAfterPaidPenalty = context.CreditCards.First().TotalAmount;
+
+            Assert.Equal(expectedAmountAfterPaidPenalty, actualAmountAfterPaidPenalty);
+            Assert.True(expectedResult == true, errorMessage);
         }
     }
 }

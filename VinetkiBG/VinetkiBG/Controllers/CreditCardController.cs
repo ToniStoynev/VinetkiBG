@@ -55,19 +55,30 @@ namespace VinetkiBG.Controllers
 
             var result = this.creditCardService.Register(creditCardServiceModel);
 
-            return this.Redirect("/CreditCard/All");
+            return this.Redirect("/CreditCard/Details");
         }
 
         [Authorize]
         public IActionResult PayPenalty(string id, string vid, decimal vam)
         {
-            ViewData["violationId"] = vid;
-            ViewData["violationAmmount"] = vam;
             var payPenaltyResult = creditCardService.PayPenalty(id, vam);
 
             var deleteViolation = creditCardService.DeleteViolation(vid);
+
             var model = this.creditCardService.GetCreditCardById(id);
+
             return this.View(model);
+        }
+
+        [Authorize]
+        public IActionResult Details()
+        {
+            string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            var model = this.creditCardService
+               .GetAllCards(userId)
+               .ToList();
+            return View(model);
         }
     }
 }

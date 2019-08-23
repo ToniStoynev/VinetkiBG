@@ -18,16 +18,14 @@ namespace VinetkiBG.Services
         {
             this.context = context;
         }
-
-        //TODO: Test this method
         public bool DeleteViolation(string id)
         {
            var vehicleFromDb = this.context.Vehicles
                 .FirstOrDefault(x => x.ViolationId == id);
+            vehicleFromDb.ViolationId = null;
 
             var violationFromDb = this.context.Violations
                 .SingleOrDefault(x => x.Id == id);
-            vehicleFromDb.ViolationId = null;
 
             this.context.Update(vehicleFromDb);
             this.context.Violations.Remove(violationFromDb);
@@ -45,7 +43,6 @@ namespace VinetkiBG.Services
             return creditCards;
         }
 
-        //TODO: Test this method
         public CreditCardDetailsViewModel GetCreditCardById(string id)
         {
             var creditCardFromDb = this.context.CreditCards
@@ -56,7 +53,6 @@ namespace VinetkiBG.Services
             return creditCard;
         }
 
-        //TODO: Test this method
         public bool PayPenalty(string cardId, decimal violationAmount)
         {
             var creditCardFromDb = this.context.CreditCards

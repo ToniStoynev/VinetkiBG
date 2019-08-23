@@ -1,0 +1,30 @@
+﻿@model List<VinetkiBG.Models.ViewModels.CreditCardAllViewModel>
+@{
+    ViewData["Title"] = "All";
+}
+<h1 class="text-center mt-4 text-primary">My Credit Cards</h1>
+<div class="button-holder text-center">
+    <a href="/CreditCard/Register" class="btn btn-outline-primary font-weight-bold">Register Credit Card</a>
+    <h6 class="text-center mt-4 font-weight-bold">Register if you don't have credit card ?</h6>
+</div>
+<div class="container mt-5">
+    <table class="table table-hover">
+        <thead>
+            <tr class="row text-center">
+                <th scope="col" class="col-lg-4">Bank Name</th>
+                <th scope="col" class="col-lg-4">IBAN</th>
+                <th scope="col" class="col-lg-4">Total Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var card in Model)
+            {
+                <tr class="row text-center">
+                    <td class="col-lg-4">@card.BankName</td>
+                    <td class="col-lg-4">@card.IBAN</td>
+                    <td class="col-lg-4 font-weight-bold">@card.TotalAmount</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
