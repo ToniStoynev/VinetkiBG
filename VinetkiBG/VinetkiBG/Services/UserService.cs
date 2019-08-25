@@ -19,7 +19,7 @@ namespace VinetkiBG.Services
         }
         public VinetkiBGUser GetUserById(string id)
         {
-            var user =  this.db.Users
+            var user = this.db.Users
                 .Include(x => x.Vehicles)
                 .FirstOrDefault(x => x.Id == id);
 
