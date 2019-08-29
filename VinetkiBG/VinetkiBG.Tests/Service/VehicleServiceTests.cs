@@ -10,6 +10,7 @@ using VinetkiBG.Services;
 using VinetkiBG.Tests.Common;
 using Xunit;
 using VinetkiBG.Services.Mapping;
+using VinetkiBG.Models.BidingModels;
 
 namespace VinetkiBG.Tests.Service
 {
@@ -275,6 +276,49 @@ namespace VinetkiBG.Tests.Service
             Assert.True(actualResult.PlateNumber == expectedResult.PlateNumber, "Plate number is not returned properly!");
             Assert.True(actualResult.OwnerId == expectedResult.OwnerId, "Owner Id is not returned properly!");
             Assert.True(actualResult.ViolationId == expectedResult.ViolationId, "Violation Id is not returned properly!");
+        }
+
+        [Fact]
+        public void EditVehicle_WithCorrectData_ShouldReturtTrue()
+        {
+            string errorMessage = "EditVehicle() doesn't work properly";
+
+            var context = VinetkiBGDbContextInMemoryFactory.InitializeContext();
+            SeedData(context);
+            this.vehicleService = new VehicleService(context);
+
+            EditVehicleBindingModel bindingModel = new EditVehicleBindingModel
+            {
+                Id = GetDummyVehicles()[0].Id,
+                Brand = "Volga",
+                Country = "Serbia",
+                Type = "Bus",
+                PlateNumber = "VS4567OU"
+            };
+
+            bool actualResult = this.vehicleService.EditVehicle(bindingModel);
+
+            Assert.True(actualResult == true, errorMessage);
+        }
+
+        [Fact]
+        public void EditVehicle_WithNonExistingId_ShouldReturnFalse()
+        {
+            var context = VinetkiBGDbContextInMemoryFactory.InitializeContext();
+            SeedData(context);
+            this.vehicleService = new VehicleService(context);
+
+            EditVehicleBindingModel bindingModel = new EditVehicleBindingModel
+            {
+                Id = "prakas",
+                Brand = "Volga",
+                Country = "Serbia",
+                Type = "Bus",
+                PlateNumber = "VS4567OU"
+            };
+
+            bool actualResult = this.vehicleService.EditVehicle(bindingModel);
+            Assert.True(actualResult == false);
         }
     }
 }

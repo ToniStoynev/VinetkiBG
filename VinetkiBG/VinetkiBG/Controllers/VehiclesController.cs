@@ -65,5 +65,27 @@ namespace VinetkiBG.Controllers
 
             return this.View(viewModel);
         }
+
+        [Authorize]
+        public IActionResult Edit(string id)
+        {
+            ViewData["VehicleId"] = id;
+
+            return this.View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult Edit(string id, EditVehicleBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return this.View();
+            }
+
+            var result = this.vehicleService.EditVehicle(model);
+
+            return this.Redirect("/Vehicles/All");
+        }
     }
 }

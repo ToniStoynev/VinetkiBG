@@ -57,7 +57,9 @@ namespace VinetkiBG.Tests.Service
             SeedData(context);
             this.violationService = new ViolationService(context);
 
-            var actualResult = this.violationService.GetViolationById("hogfdg");
+            string testId = GetDummyViolations()[0].Id;
+
+            var actualResult = this.violationService.GetViolationById(testId);
 
             var expectedResult = AutoMapper.Mapper.Map<ViolationServiceModel>(GetDummyViolations()[0]);
 

@@ -7,6 +7,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using VinetkiBG.Data;
 using VinetkiBG.Domain;
+using VinetkiBG.Models.BidingModels;
 using VinetkiBG.Models.ServiceModels;
 using VinetkiBG.Models.ViewModels;
 using VinetkiBG.Services.Mapping;
@@ -77,6 +78,40 @@ namespace VinetkiBG.Services
             var vehicle = AutoMapper.Mapper.Map<VehicleServiceModel>(vehicleFromDb);
 
             return vehicle;
+        }
+
+        public bool EditVehicle(EditVehicleBindingModel model)
+        {
+            var vehicleFromDb = db.Vehicles.SingleOrDefault(x => x.Id == model.Id);
+
+            if (vehicleFromDb == null)
+            {
+                return false;
+            }
+
+            if (model.Brand != null)
+            {
+                vehicleFromDb.Brand = model.Brand;
+            }
+            if (model.Country != null)
+            {
+                vehicleFromDb.Country = model.Country;
+            }
+            if (model.Type != null)
+            {
+                vehicleFromDb.Type = model.Type;
+            }
+            if (model.PlateNumber != null)
+            {
+                vehicleFromDb.PlateNumber = model.PlateNumber;
+            }
+            
+
+            db.Update(vehicleFromDb);
+
+            int result = db.SaveChanges();
+
+            return result > 0;
         }
     }
 }

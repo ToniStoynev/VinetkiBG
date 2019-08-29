@@ -1,0 +1,45 @@
+﻿@model VinetkiBG.Models.BidingModels.EditVehicleBindingModel
+@{
+    ViewData["Title"] = "Edit";
+    var id = ViewData["VehicleId"];
+}
+
+<h1 class="text-center">Edit</h1>
+<h4 class="text-center">Vehicle</h4>
+<hr />
+<div class="d-flex justify-content-center">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="@Model.Id" type="hidden" value="@id" />
+            <div class="form-group">
+                <label asp-for="@Model.Brand" class="control-label"></label>
+                <input asp-for="@Model.Brand" class="form-control" />
+                <span asp-validation-for="@Model.Brand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Country" class="control-label"></label>
+                <input asp-for="@Model.Country" class="form-control" />
+                <span asp-validation-for="@Model.Country" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Type" class="control-label"></label>
+                <input asp-for="@Model.Type" class="form-control" />
+                <span asp-validation-for="@Model.Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.PlateNumber" class="control-label"></label>
+                <input asp-for="@Model.PlateNumber" class="form-control" />
+                <span asp-validation-for="@Model.PlateNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group text-center">
+                <input type="submit" value="Save" class="btn btn-outline-primary font-weight-bold" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

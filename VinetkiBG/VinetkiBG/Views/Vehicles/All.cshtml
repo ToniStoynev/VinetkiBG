@@ -14,7 +14,8 @@
                 <th scope="col" class="col-lg-2 suls-text-color">Country</th>
                 <th scope="col" class="col-lg-2 suls-text-color">Licence Plate</th>
                 <th scope="col" class="col-lg-2 suls-text-color">E-Vignnete</th>
-                <th scope="col" class="col-lg-2 suls-text-color">Check for Violation</th>
+                <th scope="col" class="col-lg-1 suls-text-color">Edit Vehicle</th>
+                <th scope="col" class="col-lg-1 suls-text-color">Check for Violation</th>
             </tr>
         </thead>
         <tbody>
@@ -28,21 +29,24 @@
                 <td class="col-lg-2 suls-text-color">
                     @if (vehicle.VignetteId == null)
                     {
-                        <a href="/Vignette/Purchase?id=@vehicle.Id" class="btn btn-outline-primary">Purchase vignnete</a>
+                    <a href="/Vignette/Purchase?id=@vehicle.Id" class="btn btn-outline-primary">Purchase vignnete</a>
                     }
                     else
                     {
-                        <a href="/Vignette/Details?id=@vehicle.VignetteId" class="btn btn-outline-primary">Purchase vignnete</a>
+                    <a href="/Vignette/Details?id=@vehicle.VignetteId" class="btn btn-outline-primary">Purchase vignnete</a>
                     }
                 </td>
-                <td class="col-lg-2 suls-text-color">
+                <td class="col-lg-1 suls-text-color">
+                    <a href="/Vehicles/Edit?id=@vehicle.Id" class="btn btn-outline-primary">Edit Vehicle</a>
+                </td>
+                <td class="col-lg-1 suls-text-color">
                     @if (vehicle.ViolationId == null)
                     {
-                        <a href="/Violation/NotFound" class="btn btn-outline-primary" id="violation">See Violations</a>
+                    <a href="/Violation/NotFound" class="btn btn-outline-primary" id="violation">See Violations</a>
                     }
                     else
                     {
-                        <a href="/Violation/Details/@vehicle.ViolationId" class="btn btn-outline-primary" id="violation">See Violations</a>
+                    <a href="/Violation/Details/@vehicle.ViolationId" class="btn btn-outline-primary" id="violation">See Violations</a>
                     }
                 </td>
             </tr>

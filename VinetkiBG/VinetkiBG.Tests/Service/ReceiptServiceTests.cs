@@ -65,7 +65,9 @@ namespace VinetkiBG.Tests.Service
 
             var exectedResult = AutoMapper.Mapper.Map<ReceiptServiceModel>(receiptFromDb);
 
-            var actualResult = this.receiptService.GetReceiptById("abcd");
+            string testId = context.Receipts.First().Id;
+
+            var actualResult = this.receiptService.GetReceiptById(testId);
 
             Assert.True(exectedResult.Id == actualResult.Id, "Id is not returned properly !");
             Assert.True(exectedResult.LicensePlate == actualResult.LicensePlate, "License Plate is not returned properly !");

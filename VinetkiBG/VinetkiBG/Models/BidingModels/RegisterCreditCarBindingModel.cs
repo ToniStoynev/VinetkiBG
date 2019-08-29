@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using VinetkiBG.Models.ServiceModels;
+using VinetkiBG.Services.Mapping;
 
 namespace VinetkiBG.Models.BidingModels
 {
-    public class RegisterCreditCarBindingModel
+    public class RegisterCreditCarBindingModel : IMapTo<CreditCardServiceModel>
     {
         private const string BankErrorMessage = "Bank Name should be between 3 and 12 symbols";
         private const string IBANErrorMessage = "IBAN should be exactly 10 characters";
