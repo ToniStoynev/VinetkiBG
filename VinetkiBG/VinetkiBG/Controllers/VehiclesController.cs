@@ -71,12 +71,16 @@ namespace VinetkiBG.Controllers
         {
             ViewData["VehicleId"] = id;
 
-            return this.View();
+            var vehicleFromDb = this.vehicleService.GetVechileById(id);
+
+            var model = AutoMapper.Mapper.Map<EditVehicleBindingModel>(vehicleFromDb);
+
+            return this.View(model);
         }
 
         [Authorize]
         [HttpPost]
-        public IActionResult Edit(string id, EditVehicleBindingModel model)
+        public IActionResult Edit(EditVehicleBindingModel model)
         {
             if (!ModelState.IsValid)
             {

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using VinetkiBG.Models.ServiceModels;
+using VinetkiBG.Services.Mapping;
 
 namespace VinetkiBG.Models.BidingModels
 {
-    public class EditVehicleBindingModel
+    public class EditVehicleBindingModel : IMapFrom<VehicleServiceModel>
     {
         private const string BrandErrorMessage = "Brand must be between 2 and 12 symbols";
 
