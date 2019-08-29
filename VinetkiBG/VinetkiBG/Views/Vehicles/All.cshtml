@@ -20,32 +20,32 @@
         <tbody>
             @foreach (var vehicle in Model)
             {
-                <tr class="row">
-                    <td class="col-lg-2 suls-text-color">@vehicle.Brand</td>
-                    <td class="col-lg-2 suls-text-color">@vehicle.Type</td>
-                    <td class="col-lg-2 suls-text-color">@vehicle.Country</td>
-                    <td class="col-lg-2 suls-text-color">@vehicle.PlateNumber</td>
-                    <td class="col-lg-2 suls-text-color">
-                        @if (vehicle.VignetteId == null)
-                        {
-                            <a href="/Vignette/Purchase?id=@vehicle.Id" class="btn btn-outline-primary">Purchase vignnete</a>
-                        }
-                        else
-                        {
-                            <a href="/Vignette/Details?id=@vehicle.VignetteId" class="btn btn-outline-primary">Purchase vignnete</a>
-                        }
-                    </td>
-                    <td class="col-lg-2 suls-text-color">
-                        @if (vehicle.ViolationId == null)
-                        {
-                            <a href="/Violation/NotFound" class="btn btn-outline-primary" id="violation">See Violations</a>
-                        }
-                        else
-                        {
-                            <a href="/Violation/Details/@vehicle.ViolationId" class="btn btn-outline-primary" id="violation">See Violations</a>
-                        }
-                    </td>
-                </tr>
+            <tr class="row">
+                <td class="col-lg-2 suls-text-color">@vehicle.Brand</td>
+                <td class="col-lg-2 suls-text-color">@vehicle.Type</td>
+                <td class="col-lg-2 suls-text-color">@vehicle.Country</td>
+                <td class="col-lg-2 suls-text-color">@vehicle.PlateNumber</td>
+                <td class="col-lg-2 suls-text-color">
+                    @if (vehicle.VignetteId == null)
+                    {
+                        <a href="/Vignette/Purchase?id=@vehicle.Id" class="btn btn-outline-primary">Purchase vignnete</a>
+                    }
+                    else
+                    {
+                        <a href="/Vignette/Details?id=@vehicle.VignetteId" class="btn btn-outline-primary">Purchase vignnete</a>
+                    }
+                </td>
+                <td class="col-lg-2 suls-text-color">
+                    @if (vehicle.ViolationId == null)
+                    {
+                        <a href="/Violation/NotFound" class="btn btn-outline-primary" id="violation">See Violations</a>
+                    }
+                    else
+                    {
+                        <a href="/Violation/Details/@vehicle.ViolationId" class="btn btn-outline-primary" id="violation">See Violations</a>
+                    }
+                </td>
+            </tr>
             }
         </tbody>
     </table>

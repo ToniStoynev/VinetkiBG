@@ -1,26 +1,31 @@
-﻿@model  VinetkiBG.Models.BidingModels.RegisterCreditCarBindingModel
+﻿@model VinetkiBG.Models.BidingModels.RegisterCreditCarBindingModel
 @{
     ViewData["Title"] = "Register";
 }
 
 <h1 class="text-center text-primary">Register Credit Card</h1>
 <form class="mx-auto half-width col-5" method="post" action="/CreditCard/Register">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="top-border-line primary-separator"></div>
     <div class="form-group">
-        <label for="username">Bank Name</label>
-        <input type="text" asp-for="@Model.BankName" class="form-control" id="bankname" placeholder="Bank Name..." name="bankName">
+        <label asp-for="@Model.BankName">Bank Name</label>
+        <input asp-for="@Model.BankName" class="form-control" placeholder="Bank Name..." name="bankName">
+        <span asp-validation-for="@Model.BankName" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label for="iban">IBAN</label>
-        <input type="text" asp-for="@Model." class="form-control" id="iban" placeholder="IBAN..." name="iban">
+        <label asp-for="@Model.IBAN">IBAN</label>
+        <input asp-for="@Model.IBAN" class="form-control"  placeholder="IBAN..." name="iban">
+        <span asp-validation-for="@Model.IBAN" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label for="bic">BIC</label>
-        <input type="text" asp-for="@Model.BIC" class="form-control" id="bic" placeholder="BIC..." name="bic">
+        <label asp-for="@Model.BIC">BIC</label>
+        <input asp-for="@Model.BIC" class="form-control" placeholder="BIC..." name="bic">
+        <span asp-validation-for="@Model.BIC" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label for="totalamount">Total Amount</label>
-        <input type="number" asp-for="@Model.TotalAmount" class="form-control" id="totalamount" placeholder="Total Amount..." name="totalamount">
+        <label asp-for="@Model.TotalAmount">Total Amount</label>
+        <input asp-for="@Model.TotalAmount" class="form-control" placeholder="Total Amount..." name="totalamount">
+        <span asp-validation-for="@Model.TotalAmount" class="text-danger"></span>
     </div>
     <div class="top-border-line primary-separator"></div>
     <div class="button-holder d-flex justify-content-center">
@@ -28,3 +33,6 @@
     </div>
 </form>
 
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

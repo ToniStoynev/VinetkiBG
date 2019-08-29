@@ -5,6 +5,17 @@
     {
       "library": "jquery@3.4.1",
       "destination": "wwwroot/js/jquery/"
+    },
+    {
+      "library": "kendo-ui-core@2014.1.416",
+      "destination": "wwwroot/lib/kendo-ui-core/"
+    },
+    {
+      "library": "jquery-datetimepicker@2.5.20",
+      "destination": "wwwroot/js/jquery-datetimepicker/",
+      "files": [
+        "jquery.datetimepicker.full.min.js"
+      ]
     }
   ]
 }
