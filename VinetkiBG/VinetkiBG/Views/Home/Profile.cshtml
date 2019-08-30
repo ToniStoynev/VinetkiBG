@@ -5,23 +5,31 @@
 
 <h1 class="text-center mt-4">About me</h1>
 <div class="container-fluid w-50 mt-5">
-    <table class="table table-borderless text-center table-bordered table-primary">
+    <table class="table table-borderless text-center  text-primary">
         <thead>
-            <tr>
+            <tr class="border-bottom">
                 <th scope="col">First Name</th>
                 <td class="font-weight-bold">@Model.FirstName</td>
             </tr>
-            <tr>
+            <tr class="border-bottom">
                 <th scope="col">Last Name</th>
                 <td class="font-weight-bold">@Model.LastName</td>
             </tr>
-            <tr>
+            <tr class="border-bottom">
                 <th scope="col">Email</th>
                 <td class="font-weight-bold">@Model.Email</td>
             </tr>
-            <tr>
+            <tr class="border-bottom">
                 <th scope="col">Vechile's count</th>
-                <td class="font-weight-bold">@Model.VehiclesCount</td>
+                <td class="font-weight-bold">
+                    <a href="/Vehicles/All"> @Model.VehiclesCount</a>
+                </td>
+            </tr>
+            <tr class="border-bottom">
+                <th scope="col">Credit cards</th>
+                <td class="font-weight-bold">
+                    <a href="/CreditCard/Details">My Credit Cards</a>
+                </td>
             </tr>
         </thead>
     </table>
