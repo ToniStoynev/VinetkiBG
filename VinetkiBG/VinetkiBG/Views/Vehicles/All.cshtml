@@ -21,41 +21,57 @@
         <tbody>
             @foreach (var vehicle in Model)
             {
-            <tr class="row">
-                <td class="col-lg-2 suls-text-color">@vehicle.Brand</td>
-                <td class="col-lg-2 suls-text-color">@vehicle.Type</td>
-                <td class="col-lg-2 suls-text-color">@vehicle.Country</td>
-                <td class="col-lg-2 suls-text-color">@vehicle.PlateNumber</td>
-                <td class="col-lg-2 suls-text-color">
-                    @if (vehicle.VignetteId == null)
-                    {
-                    <a href="/Vignette/Purchase?id=@vehicle.Id" class="btn btn-outline-primary">Purchase vignnete</a>
-                    }
-                    else
-                    {
-                    <a href="/Vignette/Details?id=@vehicle.VignetteId" class="btn btn-outline-primary">Purchase vignnete</a>
-                    }
-                </td>
-                <td class="col-lg-1 suls-text-color">
-                    <a href="/Vehicles/Edit?id=@vehicle.Id" class="btn btn-outline-primary">Edit Vehicle</a>
-                </td>
-                <td class="col-lg-1 suls-text-color">
-                    @if (vehicle.ViolationId == null)
-                    {
-                    <a href="/Violation/NotFound" class="btn btn-outline-primary" id="violation">See Violations</a>
-                    }
-                    else
-                    {
-                    <a href="/Violation/Details/@vehicle.ViolationId" class="btn btn-outline-primary" id="violation">See Violations</a>
-                    }
-                </td>
-            </tr>
+                <tr class="row">
+                    <td class="col-lg-2 suls-text-color">@vehicle.Brand</td>
+                    <td class="col-lg-2 suls-text-color">@vehicle.Type</td>
+                    <td class="col-lg-2 suls-text-color">@vehicle.Country</td>
+                    <td class="col-lg-2 suls-text-color">@vehicle.PlateNumber</td>
+                    <td class="col-lg-2 suls-text-color">
+                        @if (vehicle.VignetteId == null)
+                        {
+                            <a href="/Vignette/Purchase?id=@vehicle.Id" class="btn btn-outline-primary">Purchase vignnete</a>
+                        }
+                        else
+                        {
+                            <a href="/Vignette/Details?id=@vehicle.VignetteId" class="btn btn-outline-primary">Purchase vignnete</a>
+                        }
+                    </td>
+                    <td class="col-lg-1 suls-text-color">
+                        <a href="/Vehicles/Edit?id=@vehicle.Id" class="btn btn-outline-primary">Edit Vehicle</a>
+                    </td>
+                    <td class="col-lg-1 suls-text-color">
+                        @if (vehicle.ViolationId == null)
+                        {
+                            <a href="/Violation/NotFound" class="btn btn-outline-primary" id="violation">See Violations</a>
+                        }
+                        else
+                        {
+                            <a href="/Violation/Details/@vehicle.ViolationId" class="btn btn-outline-primary" id="violation">See Violations</a>
+                        }
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
 </div>
-
+<div class="text-center">
+    <label>
+        Remove by license plate: <input type="text" name="licPlate" />
+        <button onclick="deleteByEmail()">Remove</button>
+    </label>
+</div>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
 
+<script>
+    function deleteByEmail() {
+    let plateNumbers = document.querySelectorAll("table tr td:nth-child(4)");
+    let licensePlate = document.getElementsByName("licPlate")[0].value;
+    for (let td of plateNumbers) {
+        if (td.textContent === licensePlate) {
+            td.parentNode.parentNode.removeChild(td.parentNode);
+        }
+    }
+}
+</script>
