@@ -1,22 +1,19 @@
 ﻿namespace VinetkiBG.Controllers
 {
     using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using System.Security.Claims;
     using System.Threading.Tasks;
-    using VinetkiBG.Domain;
     using VinetkiBG.Models.ViewModels;
     using VinetkiBG.Services;
 
     public class HomeController : Controller
     {
         private readonly IUserService userService;
-        private readonly UserManager<VinetkiBGUser> manager;
 
-        public HomeController(IUserService userService, UserManager<VinetkiBGUser> manager)
+        public HomeController(IUserService userService)
         {
             this.userService = userService;
-            this.manager = manager;
         }
         public IActionResult Index()
         {
@@ -27,18 +24,16 @@
         [Authorize]
         [HttpGet]
         public async Task<IActionResult> Profile()
-        {
-            var id = manager.GetUserId(this.User);
+        { 
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var user = userService.GetUserById(id);
+            var user = await userService.GetUserById(userId);
 
-            int vehicleCount = await userService.GetVehicleCountByUserId(id);
+            int vehicleCount = await userService.GetVehicleCountByUserId(userId);
 
             var model = AutoMapper.Mapper.Map<UserViewModel>(user);
 
             return this.View(model);
         }
-
-
     }
 }
