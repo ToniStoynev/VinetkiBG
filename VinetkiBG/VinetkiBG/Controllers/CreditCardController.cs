@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using VinetkiBG.Models.BidingModels;
-using VinetkiBG.Models.ServiceModels;
-using VinetkiBG.Services;
-
-namespace VinetkiBG.Controllers
+﻿namespace VinetkiBG.Controllers
 {
+    using System.Linq;
+    using System.Security.Claims;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using VinetkiBG.Models.BidingModels;
+    using VinetkiBG.Models.ServiceModels;
+    using VinetkiBG.Services;
     public class CreditCardController : Controller
     {
         private readonly ICreditCardService creditCardService;
@@ -20,20 +16,20 @@ namespace VinetkiBG.Controllers
             this.creditCardService = creditCardService;
         }
 
-        [Authorize]
-        public IActionResult All(string id, decimal amount)
-        {
-            string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        //[Authorize]
+        //public IActionResult All(string id, decimal amount)
+        //{
+        //    string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            ViewData["violationId"] = id;
-            ViewData["violationAmmount"] = amount;
+        //    ViewData["violationId"] = id;
+        //    ViewData["violationAmmount"] = amount;
 
-            var model = this.creditCardService
-                .GetAllCards(userId)
-                .ToList();
+        //    var model = creditCardService
+        //        .GetAllCards(userId)
+        //        .ToList();
 
-            return View(model);
-        }
+        //    return View(model);
+        //}
 
         [Authorize]
         public IActionResult Register()
@@ -58,27 +54,27 @@ namespace VinetkiBG.Controllers
             return this.Redirect("/CreditCard/Details");
         }
 
-        [Authorize]
-        public IActionResult PayPenalty(string id, string vid, decimal vam)
-        {
-            var payPenaltyResult = creditCardService.PayPenalty(id, vam);
+        //[Authorize]
+        //public IActionResult PayPenalty(string id, string vid, decimal vam)
+        //{
+        //    var payPenaltyResult = creditCardService.PayPenalty(id, vam);
 
-            var deleteViolation = creditCardService.DeleteViolation(vid);
+        //    var deleteViolation = creditCardService.DeleteViolation(vid);
 
-            var model = this.creditCardService.GetCreditCardById(id);
+        //    var model = this.creditCardService.GetCreditCardById(id);
 
-            return this.View(model);
-        }
+        //    return this.View(model);
+        //}
 
-        [Authorize]
-        public IActionResult Details()
-        {
-            string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        //[Authorize]
+        //public IActionResult Details()
+        //{
+        //    string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            var model = this.creditCardService
-               .GetAllCards(userId)
-               .ToList();
-            return View(model);
-        }
+        //    var model = this.creditCardService
+        //       .GetAllCards(userId)
+        //       .ToList();
+        //    return View(model);
+        //}
     }
 }

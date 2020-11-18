@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace VinetkiBG.Models.ServiceModels
+﻿namespace VinetkiBG.Models.ServiceModels
 {
     public class CheckVehicleServiceModel
     {

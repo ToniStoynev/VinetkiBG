@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using VinetkiBG.Domain;
-using VinetkiBG.Models;
-using VinetkiBG.Models.ViewModels;
-using VinetkiBG.Services;
-
-namespace VinetkiBG.Controllers
+﻿namespace VinetkiBG.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using System.Threading.Tasks;
+    using VinetkiBG.Domain;
+    using VinetkiBG.Models.ViewModels;
+    using VinetkiBG.Services;
+
     public class HomeController : Controller
     {
         private readonly IUserService userService;
@@ -30,13 +25,14 @@ namespace VinetkiBG.Controllers
 
 
         [Authorize]
-        public IActionResult Profile()
+        [HttpGet]
+        public async Task<IActionResult> Profile()
         {
             var id = manager.GetUserId(this.User);
 
-            var user = this.userService.GetUserById(id);
+            var user = userService.GetUserById(id);
 
-            int vehicleCount = userService.GetVehicleCountByUserId(id);
+            int vehicleCount = await userService.GetVehicleCountByUserId(id);
 
             var model = AutoMapper.Mapper.Map<UserViewModel>(user);
 

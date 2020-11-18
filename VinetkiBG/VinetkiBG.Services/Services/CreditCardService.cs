@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using VinetkiBG.Data;
-using VinetkiBG.Domain;
-using VinetkiBG.Models.ServiceModels;
-using VinetkiBG.Models.ViewModels;
-using VinetkiBG.Services.Mapping;
-
-namespace VinetkiBG.Services
+﻿namespace VinetkiBG.Services
 {
+   
+    using System.Linq;
+    using VinetkiBG.Data;
+    using VinetkiBG.Domain;
+    using VinetkiBG.Models.ServiceModels;
+    using VinetkiBG.Services.Mapping;
     public class CreditCardService : ICreditCardService
     {
         private readonly VinetkiBGDbContext context;
@@ -34,24 +30,24 @@ namespace VinetkiBG.Services
             return result > 0;
         }
 
-        public IQueryable<CreditCardAllViewModel> GetAllCards(string id)
-        {
-            var creditCards = this.context.CreditCards
-                .Where(x => x.CardHolderId == id)
-                .To<CreditCardAllViewModel>();
+        //public IQueryable<CreditCardAllViewModel> GetAllCards(string id)
+        //{
+        //    var creditCards = this.context.CreditCards
+        //        .Where(x => x.CardHolderId == id)
+        //        .To<CreditCardAllViewModel>();
 
-            return creditCards;
-        }
+        //    return creditCards;
+        //}
 
-        public CreditCardDetailsViewModel GetCreditCardById(string id)
-        {
-            var creditCardFromDb = this.context.CreditCards
-                .SingleOrDefault(x => x.Id == id);
+        //public CreditCardDetailsViewModel GetCreditCardById(string id)
+        //{
+        //    var creditCardFromDb = this.context.CreditCards
+        //        .SingleOrDefault(x => x.Id == id);
 
-            var creditCard = AutoMapper.Mapper.Map<CreditCardDetailsViewModel>(creditCardFromDb);
+        //    var creditCard = AutoMapper.Mapper.Map<CreditCardDetailsViewModel>(creditCardFromDb);
 
-            return creditCard;
-        }
+        //    return creditCard;
+        //}
 
         public bool PayPenalty(string cardId, decimal violationAmount)
         {

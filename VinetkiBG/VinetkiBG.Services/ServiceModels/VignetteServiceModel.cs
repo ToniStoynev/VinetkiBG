@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using VinetkiBG.Domain;
-using VinetkiBG.Services.Mapping;
-
-namespace VinetkiBG.Models.ServiceModels
+﻿namespace VinetkiBG.Models.ServiceModels
 {
+    using System;
+    using VinetkiBG.Domain;
+    using VinetkiBG.Services.Mapping;
     public class VignetteServiceModel : IMapFrom<Vignette>, IMapTo<Vignette>
     {
         public string Id { get; set; }

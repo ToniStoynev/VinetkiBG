@@ -27,37 +27,37 @@ namespace VinetkiBG.Areas.Administration.Controllers
             return this.View();
         }
 
-        [HttpPost]
-        public IActionResult VignetteCheck(VignetteCheckInputModel input)
-        {
-            var checkVehicleServiceModel = new CheckVehicleServiceModel
-            {
-                Country = input.Country,
-                LicensePlate = input.PlateNumber
-            };
+        //[HttpPost]
+        //public IActionResult VignetteCheck(VignetteCheckInputModel input)
+        //{
+        //    var checkVehicleServiceModel = new CheckVehicleServiceModel
+        //    {
+        //        Country = input.Country,
+        //        LicensePlate = input.PlateNumber
+        //    };
 
-            var vechileFromDb = this.vehicleService
-                .GetVechileByCountryAndLicensePlate(checkVehicleServiceModel);
+        //    var vechileFromDb = this.vehicleService
+        //        .GetVechileByCountryAndLicensePlate(checkVehicleServiceModel);
 
-            if (vechileFromDb == null)
-            {
-                return this.Redirect("/Administration/Violation/NotFoundVehicle");
-            }
+        //    if (vechileFromDb == null)
+        //    {
+        //        return this.Redirect("/Administration/Violation/NotFoundVehicle");
+        //    }
 
-            var vignetteFromDb = this.vignneteService.CheckVignette(checkVehicleServiceModel);
+        //    var vignetteFromDb = this.vignneteService.CheckVignette(checkVehicleServiceModel);
 
-            if (vignetteFromDb == null && vechileFromDb.ViolationId == null)
-            {
-                return this.Redirect($"/Administration/Violation/Register/{vechileFromDb.Id}");
-            }
+        //    if (vignetteFromDb == null && vechileFromDb.ViolationId == null)
+        //    {
+        //        return this.Redirect($"/Administration/Violation/Register/{vechileFromDb.Id}");
+        //    }
 
-            if (vignetteFromDb == null && vechileFromDb.ViolationId != null)
-            {
-                return this.Redirect($"/Administration/Violation/Details/{vechileFromDb.ViolationId}");
-            }
+        //    if (vignetteFromDb == null && vechileFromDb.ViolationId != null)
+        //    {
+        //        return this.Redirect($"/Administration/Violation/Details/{vechileFromDb.ViolationId}");
+        //    }
 
-            return this.Redirect($"/Administration/Vignette/Details/{vignetteFromDb.Id}");
-        }
+        //    return this.Redirect($"/Administration/Vignette/Details/{vignetteFromDb.Id}");
+        //}
 
         public IActionResult NotFoundVignette()
         {

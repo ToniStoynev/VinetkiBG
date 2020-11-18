@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using VinetkiBG.Data;
-using VinetkiBG.Domain;
-using VinetkiBG.Models.BidingModels;
-using VinetkiBG.Models.ServiceModels;
-using VinetkiBG.Models.ViewModels;
-using VinetkiBG.Services;
-
-namespace VinetkiBG.Controllers
+﻿namespace VinetkiBG.Controllers
 {
+    using System;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using VinetkiBG.Models.BidingModels;
+    using VinetkiBG.Models.ServiceModels;
+    using VinetkiBG.Models.ViewModels;
+    using VinetkiBG.Services;
     public class VignetteController : Controller
     {
         private readonly IVignneteService vignneteService;
@@ -36,63 +30,63 @@ namespace VinetkiBG.Controllers
             return this.View();
         }
 
-        [Authorize]
-        [HttpPost]
-        public IActionResult Purchase(PurchaseVignetteBidingModel input)
-        {
-            if (!ModelState.IsValid)
-            {
-                return this.View();
-            }
+        //[Authorize]
+        //[HttpPost]
+        //public IActionResult Purchase(PurchaseVignetteBidingModel input)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return this.View();
+        //    }
 
-            var vignetteServiceModel = new VignetteServiceModel
-            {
-                Category = input.Category,
-                StartDate = input.StartDate,
-                VehicleId = input.VehicleId
-            };
+        //    var vignetteServiceModel = new VignetteServiceModel
+        //    {
+        //        Category = input.Category,
+        //        StartDate = input.StartDate,
+        //        VehicleId = input.VehicleId
+        //    };
 
-            vignetteServiceModel.EndDate = input.StartDate;
+        //    vignetteServiceModel.EndDate = input.StartDate;
 
-            switch (input.Category)
-            {
-                case "Weekend":
-                    vignetteServiceModel.EndDate = input.StartDate.AddDays(3);
-                    vignetteServiceModel.Price = 10;
-                    break;
-                case "Weekly":
-                    vignetteServiceModel.EndDate = input.StartDate.AddDays(7);
-                    vignetteServiceModel.Price = 15;
-                    break;
-                case "Monthly":
-                    vignetteServiceModel.EndDate = input.StartDate.AddMonths(1);
-                    vignetteServiceModel.Price = 30;
-                    break;
-                case "Yearly":
-                    vignetteServiceModel.EndDate = input.StartDate.AddYears(1);
-                    vignetteServiceModel.Price = 97;
-                    break;
-                default:
-                    break;
-            }
+        //    switch (input.Category)
+        //    {
+        //        case "Weekend":
+        //            vignetteServiceModel.EndDate = input.StartDate.AddDays(3);
+        //            vignetteServiceModel.Price = 10;
+        //            break;
+        //        case "Weekly":
+        //            vignetteServiceModel.EndDate = input.StartDate.AddDays(7);
+        //            vignetteServiceModel.Price = 15;
+        //            break;
+        //        case "Monthly":
+        //            vignetteServiceModel.EndDate = input.StartDate.AddMonths(1);
+        //            vignetteServiceModel.Price = 30;
+        //            break;
+        //        case "Yearly":
+        //            vignetteServiceModel.EndDate = input.StartDate.AddYears(1);
+        //            vignetteServiceModel.Price = 97;
+        //            break;
+        //        default:
+        //            break;
+        //    }
 
-            var vignetteId  = this.vignneteService.BuyVignette(vignetteServiceModel);
+        //    var vignetteId  = this.vignneteService.BuyVignette(vignetteServiceModel);
 
-            var currentVehicle = this.vehicleService.GetVechileById(vignetteServiceModel.VehicleId);
+        //    var currentVehicle = this.vehicleService.GetVechileById(vignetteServiceModel.VehicleId);
     
-            var receipt = new ReceiptServiceModel
-            {
-                LicensePlate = currentVehicle.PlateNumber,
-                VehicleType = currentVehicle.Type,
-                StartDate = input.StartDate,
-                EndDate = vignetteServiceModel.EndDate,
-                Price = vignetteServiceModel.Price,
-                VignetteId = vignetteId
-            };
+        //    var receipt = new ReceiptServiceModel
+        //    {
+        //        LicensePlate = currentVehicle.PlateNumber,
+        //        VehicleType = currentVehicle.Type,
+        //        StartDate = input.StartDate,
+        //        EndDate = vignetteServiceModel.EndDate,
+        //        Price = vignetteServiceModel.Price,
+        //        VignetteId = vignetteId
+        //    };
 
-            var receiptInDb = this.receiptService.CreateReceipt(receipt);
-            return this.Redirect($"/Receipt/My/{receiptInDb}");
-        }
+        //    var receiptInDb = this.receiptService.CreateReceipt(receipt);
+        //    return this.Redirect($"/Receipt/My/{receiptInDb}");
+        //}
 
         [HttpGet]
         public IActionResult Details(string id)

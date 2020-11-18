@@ -1,15 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using VinetkiBG.Data;
-using VinetkiBG.Domain;
-using VinetkiBG.Models.ServiceModels;
-using VinetkiBG.Models.ViewModels;
-
-namespace VinetkiBG.Services
+﻿namespace VinetkiBG.Services
 {
+    using Microsoft.EntityFrameworkCore;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using VinetkiBG.Data;
+    using VinetkiBG.Domain;
+    using VinetkiBG.Models.ServiceModels;
     public class VignetteService : IVignneteService
     {
         private readonly VinetkiBGDbContext db;

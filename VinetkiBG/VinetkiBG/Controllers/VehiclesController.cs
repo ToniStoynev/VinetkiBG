@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using VinetkiBG.Domain;
-using VinetkiBG.Models.BidingModels;
-using VinetkiBG.Models.ServiceModels;
-using VinetkiBG.Services;
-
-namespace VinetkiBG.Controllers
+﻿namespace VinetkiBG.Controllers
 {
+    using System.Linq;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using VinetkiBG.Domain;
+    using VinetkiBG.Models.BidingModels;
+    using VinetkiBG.Models.ServiceModels;
+    using VinetkiBG.Models.ViewModels;
+    using VinetkiBG.Services;
+    using VinetkiBG.Services.Mapping;
+
     public class VehiclesController : Controller
     {
         private readonly IVehicleService vehicleService;
@@ -32,19 +32,14 @@ namespace VinetkiBG.Controllers
 
         [Authorize]
         [HttpPost]
-        public IActionResult Add(AddVechileBidingModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return this.Redirect("/Vehicles/Add");
-            }
-
+        public async Task<IActionResult> Add(AddVechileBidingModel model)
+        { 
             string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             var vehicleServiceModel = AutoMapper.Mapper.Map<VehicleServiceModel>(model);
             vehicleServiceModel.OwnerId = userId;
 
-            var isRegisterdNewVehicle = this.vehicleService.CreateVehicle(vehicleServiceModel);
+            var isRegisterdNewVehicle = await this.vehicleService.CreateVehicle(vehicleServiceModel);
 
             if (!isRegisterdNewVehicle)
             {
@@ -55,13 +50,14 @@ namespace VinetkiBG.Controllers
         }
 
         [Authorize]
-        public IActionResult All()
+        [HttpGet]
+        public async Task<IActionResult> All()
         {
             string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            var viewModel = this.vehicleService
+            var viewModel =  this.vehicleService
                 .GetAll(userId)
-                .ToList();
+                .To<VehicleViewAllModel>();
 
             return this.View(viewModel);
         }
@@ -78,18 +74,18 @@ namespace VinetkiBG.Controllers
             return this.View(model);
         }
 
-        [Authorize]
-        [HttpPost]
-        public IActionResult Edit(EditVehicleBindingModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return this.View();
-            }
+        //[Authorize]
+        //[HttpPost]
+        //public IActionResult Edit(EditVehicleBindingModel model)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return this.View();
+        //    }
 
-            var result = this.vehicleService.EditVehicle(model);
+        //    var result = this.vehicleService.EditVehicle(model);
 
-            return this.Redirect("/Vehicles/All");
-        }
+        //    return this.Redirect("/Vehicles/All");
+        //}
     }
 }

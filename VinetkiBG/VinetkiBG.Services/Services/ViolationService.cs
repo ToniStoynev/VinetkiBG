@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using VinetkiBG.Data;
-using VinetkiBG.Domain;
-using VinetkiBG.Models.BidingModels;
-using VinetkiBG.Models.ServiceModels;
-
-namespace VinetkiBG.Services
+﻿namespace VinetkiBG.Services
 {
+    using System.Linq;
+    using VinetkiBG.Data;
+    using VinetkiBG.Domain;
+    using VinetkiBG.Models.ServiceModels;
+
     public class ViolationService : IViolationService
     {
         private readonly VinetkiBGDbContext db;

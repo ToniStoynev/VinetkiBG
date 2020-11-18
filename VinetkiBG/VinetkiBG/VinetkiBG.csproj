@@ -19,6 +19,7 @@
     <ProjectReference Include="..\Services.Mapping\Services.Mapping.csproj" />
     <ProjectReference Include="..\VinetkiBG.Data\VinetkiBG.Data.csproj" />
     <ProjectReference Include="..\VinetkiBG.Domain\VinetkiBG.Domain.csproj" />
+    <ProjectReference Include="..\VinetkiBG.Services\VinetkiBG.Services.csproj" />
   </ItemGroup>
 
 </Project>

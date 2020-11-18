@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using VinetkiBG.Models.ViewModels;
-using VinetkiBG.Services;
-
-namespace VinetkiBG.Controllers
+﻿namespace VinetkiBG.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using VinetkiBG.Models.ViewModels;
+    using VinetkiBG.Services;
     public class ReceiptController : Controller
     {
         private readonly IReceiptService receiptService;
